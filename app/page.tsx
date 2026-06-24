@@ -11,7 +11,7 @@ const work = [
     desc: "Real-time mapping and victim detection for search & rescue.",
     href: "/rosmaster",
     external: false,
-    img: "/images/robot-sar.jpg",
+    img: "/images/robot-sar.png",
   },
   {
     title: "Robotic Process Automation",
@@ -19,7 +19,7 @@ const work = [
     desc: "Turned 2,700 wireless-charging safety tests into one unattended run.",
     href: "/fod-testing",
     external: false,
-    img: "/images/robot-fod.jpg",
+    img: "/images/robot-fod.png",
   },
   {
     title: "TriFinger Manipulation",
@@ -27,7 +27,7 @@ const work = [
     desc: "Low-cost dexterous manipulation platform.",
     href: "https://sites.google.com/eng.ucsd.edu/156b-2021-winter-team03/home_1",
     external: true,
-    img: "/images/robot-trifinger.jpg",
+    img: "/images/robot-trifinger.png",
   },
 ];
 
