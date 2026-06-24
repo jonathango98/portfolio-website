@@ -1,0 +1,80 @@
+.section {
+  background: var(--paper);
+  padding: clamp(100px, 14vw, 192px) var(--gutter) clamp(80px, 10vw, 120px);
+}
+
+.shell {
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-4);
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 clamp(64px, 8vw, 96px);
+  max-width: 18ch;
+}
+
+.nodes {
+  list-style: none;
+  margin: 0 0 clamp(80px, 12vw, 160px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.node {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.nodeLabel {
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.nodeValue {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.nodeValue:hover {
+  color: var(--signal);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.origin {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.reticle {
+  font-size: 1.25rem;
+  color: var(--slate);
+  line-height: 1;
+}
+
+.originLabel {
+  color: var(--slate);
+}
