@@ -120,7 +120,7 @@ export default function Home() {
 
         <section id="work" className={styles.section} aria-labelledby="work-h">
           <h2 id="work-h" className={`label ${styles.sectionLabel}`}>
-            Selected work
+            ROBOTS
           </h2>
           <ul className={styles.rows}>
             {work.map((w) => (
