@@ -63,7 +63,7 @@ const projects = [
   {
     title: "Photobooth",
     desc: "Web app: capture, template, and generate QR codes.",
-    href: "https://github.com/jonathango98/photobooth",
+    href: "https://jogo-photobooth.netlify.app",
   },
   {
     title: "Snake AI",
