@@ -182,15 +182,14 @@ export default function RosmasterPage() {
             Software Architecture
           </h2>
           <p className={styles.sectionIntro}>
-            Full ROS2 node graph — pan, zoom, and explore interactively.
+            Full ROS2 node graph and system breakdown.
           </p>
-          <iframe
-            src="https://miro.com/app/live-embed/uXjVL8SRo48=/"
-            className={styles.miroEmbed}
-            frameBorder="0"
-            scrolling="no"
-            allow="fullscreen; clipboard-read; clipboard-write"
-            allowFullScreen
+          <Image
+            src="/images/rosmaster-software-architecture.jpg"
+            alt="ROSMASTER software architecture diagram showing the ROS2 node graph"
+            width={8823}
+            height={5553}
+            className={styles.archImg}
           />
           <div className={styles.stackRow}>
             {stack.map((s) => (
