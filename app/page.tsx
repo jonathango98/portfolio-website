@@ -56,7 +56,7 @@ const experience = [
 
 const projects = [
   {
-    title: "Jogo Menu",
+    title: "The List",
     desc: "A personal guide to the exact dishes to order in LA, SF, NY & Seattle.",
     href: "https://jogo-menu.netlify.app",
   },
