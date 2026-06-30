@@ -2,16 +2,16 @@ import ThemeToggle from "./ThemeToggle";
 import styles from "./Nav.module.css";
 
 const links = [
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Nav() {
   return (
     <header className={styles.nav}>
       <div className={styles.inner}>
-        <a href="#main" className={styles.monogram} aria-label="Home">
+        <a href="/" className={styles.monogram} aria-label="Home">
           <span>JG</span>
         </a>
 
