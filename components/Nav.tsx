@@ -2,7 +2,7 @@ import ThemeToggle from "./ThemeToggle";
 import styles from "./Nav.module.css";
 
 const links = [
-  { label: "Work", href: "/#work" },
+  { label: "Robots", href: "/#work" },
   { label: "Experience", href: "/#experience" },
   { label: "Contact", href: "/#contact" },
 ];
