@@ -222,9 +222,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className={`caption ${styles.miniLegend}`}>
-            live = running now · repo = source
-          </p>
         </section>
 
         <section id="contact" className={styles.section} aria-labelledby="ct-h">
