@@ -1,9 +1,17 @@
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
+import RosmasterFlowWrapper from "@/components/RosmasterFlowWrapper";
 import styles from "./page.module.css";
 
 export const metadata = { title: "Autonomous SAR Rover — Jonathan Goenadibrata" };
+
+const heroMeta = [
+  { label: "Context", value: "UC Berkeley M.Eng Capstone · 2024–25" },
+  { label: "Platform", value: "Yahboom RDK X3 · ROS 2 Foxy" },
+  { label: "Autonomy", value: "SLAM · exploration · A* navigation" },
+  { label: "Payload", value: "Electromagnetic aid-delivery arm" },
+];
 
 const crisisStats = [
   { value: "65%", desc: "of aftershocks happen within the first 24 hours of an earthquake" },
@@ -30,27 +38,50 @@ const capabilities = [
   {
     tag: "01",
     title: "Mapping",
-    desc: "LiDAR builds a live map of the environment, giving the system a real-time understanding of the room layout and the robot's position within it.",
+    tech: "LiDAR · Cartographer SLAM",
+    desc: "LiDAR, wheel odometry, and IMU data are fused into a live 2D map, giving the system the room layout and the robot's position within it — no GPS, no prior floor plan.",
   },
   {
     tag: "02",
     title: "Navigation",
-    desc: "With the map, the robot patrols the space while continuously updating its model. Operators can also steer manually via live camera feed over a wireless link.",
+    tech: "Nav2 · A* · frontier exploration",
+    desc: "The robot explores unmapped space on its own, planning paths with A* over the live map and re-routing around obstacles. Operators can also steer manually via the live camera feed.",
   },
   {
     tag: "03",
-    title: "Image Detection",
-    desc: "The front-facing camera detects and localises survivors. In the prototype, AprilTags simulate survivor detection to simplify image recognition while proving the pipeline.",
+    title: "Survivor Detection",
+    tech: "OpenCV · AprilTags",
+    desc: "The front-facing camera detects survivors and a converter node projects each detection from camera frame into map coordinates, so found survivors become navigation goals.",
   },
   {
     tag: "04",
-    title: "Pick-Up Tool",
-    desc: "A custom electromagnetic arm carries aid supplies directly to survivors. Magnetic attachments enable simple, reliable pickup and release of the aid packages.",
+    title: "Aid Delivery",
+    tech: "Electromagnet · custom arm",
+    desc: "A custom electromagnetic arm carries first-aid packages to survivors. A magnet switch gives binary, repeatable pickup and release — no grasp planning required.",
+  },
+];
+
+const decisions = [
+  {
+    title: "AprilTags as survivor proxies",
+    desc: "Human detection wasn't the research question — the delivery pipeline was. Tags stand in for survivors so the full detect → localize → navigate → deliver loop could be proven end-to-end, with the vision model swappable later.",
+  },
+  {
+    title: "Electromagnet instead of a gripper",
+    desc: "A gripper needs grasp planning and fails in unpredictable ways. Magnetic attachments on the aid packages reduce pickup and release to a single switch — reliable enough to demo repeatedly.",
+  },
+  {
+    title: "Cartographer SLAM with sensor fusion",
+    desc: "Collapsed interiors are GPS-denied and cluttered. Fusing LiDAR scans with odometry and IMU keeps the map and pose estimate stable when any single sensor degrades.",
+  },
+  {
+    title: "Autonomy with an operator in the loop",
+    desc: "The robot maps, explores, and navigates on its own, but RViz streams the live map and detections to an operator who can override with a goal pose at any time. In a rescue, a human stays in command.",
   },
 ];
 
 const stack = [
-  "ROS2 Jazzy", "Ubuntu Linux", "Navigation2",
+  "ROS 2 Foxy", "Ubuntu 20.04", "Navigation2",
   "Cartographer SLAM", "OpenCV", "Python 3",
   "Yahboom RDK X3", "A* Pathfinding",
 ];
@@ -85,9 +116,6 @@ export default function RosmasterPage() {
                 and relay critical information — <em>without putting
                 responders at risk</em>.
               </p>
-              <p className={`caption ${styles.heroBadge}`}>
-                Yahboom RDK X3 · 2024–2025
-              </p>
             </div>
             <div className={styles.heroImage}>
               <Image
@@ -100,6 +128,14 @@ export default function RosmasterPage() {
               />
             </div>
           </div>
+          <dl className={styles.heroMeta}>
+            {heroMeta.map((m) => (
+              <div key={m.label} className={styles.heroMetaItem}>
+                <dt className={`label ${styles.heroMetaLabel}`}>{m.label}</dt>
+                <dd className={styles.heroMetaValue}>{m.value}</dd>
+              </div>
+            ))}
+          </dl>
         </header>
 
         {/* ── Crisis stats ─────────────────────────────────────────────── */}
@@ -151,24 +187,27 @@ export default function RosmasterPage() {
         {/* ── Callout ──────────────────────────────────────────────────── */}
         <div className={styles.callout}>
           <p className={styles.calloutText}>
-            What if there's a way to meet <em>all three needs</em>{" "}
-            without putting a single responder at risk?
+            So we send the robot in first. It maps the interior, finds
+            survivors, delivers aid, and reports conditions — before any
+            responder steps inside.
           </p>
         </div>
 
         {/* ── Capabilities ─────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="caps-h">
           <h2 id="caps-h" className={`label ${styles.sectionLabel}`}>
-            Big Impact in Small Packages
+            Capabilities
           </h2>
           <p className={styles.sectionIntro}>
-            A modular software stack turns a palm-sized rover into a
-            complete search-and-rescue platform.
+            Four subsystems, each a set of ROS 2 nodes, running together
+            on a palm-sized rover.
           </p>
           <div className={styles.capabilities}>
             {capabilities.map((c) => (
               <div key={c.tag} className={styles.capability}>
-                <span className={`caption ${styles.capTag}`}>{c.tag}</span>
+                <span className={`caption ${styles.capTag}`}>
+                  {c.tag} <span className={styles.capTech}>{c.tech}</span>
+                </span>
                 <h3 className={styles.capTitle}>{c.title}</h3>
                 <p className={styles.capDesc}>{c.desc}</p>
               </div>
@@ -182,18 +221,52 @@ export default function RosmasterPage() {
             Software Architecture
           </h2>
           <p className={styles.sectionIntro}>
-            Full ROS2 node graph and system breakdown.
+            The full ROS 2 node graph. Sensors feed the mapping and
+            detection pipelines; both converge on a master script that
+            plans navigation and commands the rescue tool. Drag to pan,
+            zoom with the controls.
           </p>
-          <Image
-            src="/images/rosmaster-software-architecture.jpg"
-            alt="ROSMASTER software architecture diagram showing the ROS2 node graph"
-            width={8823}
-            height={5553}
-            className={styles.archImg}
-          />
+          <RosmasterFlowWrapper />
+          <ul className={styles.legend} aria-label="Diagram legend">
+            <li className={styles.legendItem}>
+              <span className={styles.legendSwatch} style={{ background: "#f0fdf4", borderColor: "#86efac" }} />
+              Sensor
+            </li>
+            <li className={styles.legendItem}>
+              <span className={styles.legendSwatch} style={{ background: "#eff6ff", borderColor: "#93c5fd" }} />
+              Processing
+            </li>
+            <li className={styles.legendItem}>
+              <span className={styles.legendSwatch} style={{ background: "#fefce8", borderColor: "#fde047" }} />
+              Actuator
+            </li>
+            <li className={styles.legendItem}>
+              <span className={styles.legendLine} aria-hidden="true">—</span>
+              ROS topic
+            </li>
+            <li className={styles.legendItem}>
+              <span className={styles.legendLine} aria-hidden="true">- -</span>
+              Launch / init
+            </li>
+          </ul>
           <div className={styles.stackRow}>
             {stack.map((s) => (
               <span key={s} className={styles.stackBadge}>{s}</span>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Decisions ────────────────────────────────────────────────── */}
+        <section className={styles.section} aria-labelledby="dec-h">
+          <h2 id="dec-h" className={`label ${styles.sectionLabel}`}>
+            Engineering Decisions
+          </h2>
+          <div className={styles.decisions}>
+            {decisions.map((d) => (
+              <div key={d.title} className={styles.decision}>
+                <h3 className={styles.decisionTitle}>{d.title}</h3>
+                <p className={styles.decisionDesc}>{d.desc}</p>
+              </div>
             ))}
           </div>
         </section>

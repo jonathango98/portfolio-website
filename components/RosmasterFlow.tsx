@@ -87,9 +87,9 @@ const nodes: Node[] = [
 
   // Rescue Tool
   { id: 'gripper',       data: { label: 'Gripper' },       position: { x: 46, y: 140 },
-    style: ns('actuator', 110), sourcePosition: Position.Bottom, targetPosition: Position.Top },
+    style: ns('actuator', 110), sourcePosition: Position.Bottom, targetPosition: Position.Right },
   { id: 'magnet-switch', data: { label: 'Magnet Switch' }, position: { x: 46, y: 268 },
-    style: ns('actuator', 110), sourcePosition: Position.Bottom, targetPosition: Position.Top },
+    style: ns('actuator', 110), sourcePosition: Position.Bottom, targetPosition: Position.Right },
 
   // Object Detection
   { id: 'mipi-camera', data: { label: 'MIPI Camera' }, position: { x: 218, y: 140 },
@@ -165,7 +165,7 @@ const edges: Edge[] = [
   dataEdge('e-mipi-tf',    'mipi-camera', 'tf',       'image/raw'),
   dataEdge('e-tf-objdet',  'tf',          'obj-det',  'camera/tf'),
   dataEdge('e-objdet-c2m', 'obj-det',     'cam2map',  'detections'),
-  dataEdge('e-c2m-rviz',   'cam2map',     'rviz'),
+  dataEdge('e-c2m-rviz',   'cam2map',     'rviz',     'markers'),
   dataEdge('e-c2m-master', 'cam2map',     'master-script', 'object_pose'),
 
   // URDF → RViz
@@ -177,27 +177,31 @@ const edges: Edge[] = [
   dataEdge('e-imu-cart',   'imu',         'cartographer', 'imu'),
   dataEdge('e-cart-rviz',  'cartographer', 'rviz',         'map'),
   dataEdge('e-cart-master','cartographer', 'master-script','map'),
-  dataEdge('e-explore-master', 'exploration', 'master-script'),
+  dataEdge('e-explore-master', 'exploration', 'master-script', 'frontier_goal'),
 
   // Navigation
   dataEdge('e-rviz-master',   'rviz',           'master-script',  'goal_pose'),
   dataEdge('e-master-avoid',  'master-script',  'obstacle-avoid', 'nav_goal'),
   dataEdge('e-avoid-motor',   'obstacle-avoid', 'motor-controls', 'cmd_vel'),
 
-  // Rescue tool handshake (subtle init-style: these are command triggers, not data streams)
-  initEdge('ei-gripper-master', 'gripper',       'master-script'),
-  initEdge('ei-magnet-master',  'magnet-switch', 'master-script'),
+  // Rescue tool commands: master script drives the actuators
+  dataEdge('e-master-gripper', 'master-script', 'gripper',       'grip_cmd'),
+  dataEdge('e-master-magnet',  'master-script', 'magnet-switch', 'magnet_cmd'),
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────
 export default function RosmasterFlow() {
   return (
-    <div style={{
-      width: '100%', height: 640,
-      borderRadius: 14, overflow: 'hidden',
-      border: '1px solid #e3e5e9',
-      background: '#fcfcfd',
-    }}>
+    <div
+      role="figure"
+      aria-label="ROS 2 node graph: sensors feed mapping and object detection; both converge on a master script that plans navigation and commands the rescue tool"
+      style={{
+        width: '100%', height: 'clamp(420px, 70vh, 640px)',
+        borderRadius: 14, overflow: 'hidden',
+        border: '1px solid #e3e5e9',
+        background: '#fcfcfd',
+      }}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -209,6 +213,8 @@ export default function RosmasterFlow() {
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
+        zoomOnScroll={false}
+        preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
         <Background variant={BackgroundVariant.Dots} gap={22} size={1} color="#e8eaed" />

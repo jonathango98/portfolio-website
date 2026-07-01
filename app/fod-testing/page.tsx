@@ -1,11 +1,12 @@
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
 import styles from "./page.module.css";
 
 export const metadata = {
   title: "Foreign Object Detection — Jonathan Goenadibrata",
+  description:
+    "Robotic automation of Apple's wireless-charging foreign-object safety tests: 2,700 tests per product run unattended, cutting manual labor 96%.",
 };
 
 const volumeCards = [
@@ -17,26 +18,31 @@ const volumeCards = [
   { n: "25", label: "alignments"     },
 ];
 
-const features: { title: string; desc: ReactNode }[] = [
+const features: { title: string; desc: string }[] = [
   {
     title: "Autonomous Test Execution",
-    desc: <>Executes simple tests with <strong>minimal setup</strong> — <u>no manual intervention required</u> after initialization.</>,
+    desc: "Places the foreign object, runs the charge cycle, and logs temperature data — no operator needed after initialization.",
   },
   {
     title: "End-to-End Device Preparation",
-    desc: <>Manages all device prep: charging, draining, and configuring for each scenario. <em>Consistent and repeatable.</em></>,
+    desc: "Charges, drains, and configures devices for each scenario, so every run starts from the same repeatable state.",
   },
   {
     title: "Continuous & Scalable",
-    desc: <>Runs <strong>unattended</strong>, including <em>overnight</em>. Modular design supports parallel systems for higher throughput.</>,
+    desc: "Runs unattended, including overnight. Nine systems operate in parallel to cover the full 2,700-test matrix in a day.",
   },
 ];
 
-const stats = [
-  { value: "25×", label: "test coverage", caption: "vs. manual baseline" },
-  { value: "96%", label: "labor reduction", caption: "per product cycle" },
-  { value: "280", label: "hours freed / yr", caption: "across 8 products" },
-  { value: "1.5", label: "hrs per product", caption: "automated runtime" },
+const comparison = [
+  { metric: "Tests per product", manual: "108", automated: "2,700" },
+  { metric: "Time per product", manual: "2.4 days", automated: "1 day" },
+  {
+    metric: "Throughput",
+    manual: "3 engineers · 10 min/test",
+    automated: "9 robots · 5 min/test",
+  },
+  { metric: "Person-hours per product", manual: "36.5", automated: "1.5" },
+  { metric: "Labor per year (8 products)", manual: "292 hrs", automated: "12 hrs" },
 ];
 
 const socials = [
@@ -62,9 +68,9 @@ export default function FodTestingPage() {
             Foreign Object<br />Detection
           </h1>
           <p className={styles.heroSub}>
-            Robotic system that replaced <strong>280 hrs/yr</strong> of
-            manual wireless-charging safety tests at Apple with{" "}
-            <em>a single unattended overnight run</em>.
+            Robotic systems that run Apple&apos;s wireless-charging safety
+            tests end to end — device prep, test execution, temperature data
+            collection — unattended, overnight.
           </p>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
@@ -85,7 +91,7 @@ export default function FodTestingPage() {
             </div>
           </div>
           <p className={`caption ${styles.heroBadge}`}>
-            Hyulim DTR-MU · Aug 2021 – Jun 2024
+            Safety Test Automation Engineer · Hyulim DTR-MU · Aug 2021 – Jun 2024
           </p>
         </header>
 
@@ -147,9 +153,9 @@ export default function FodTestingPage() {
         {/* callout */}
         <div className={styles.callout}>
           <p className={styles.calloutText}>
-            How to <em>better allocate time</em> for engineers in order to
-            maximize <strong>human problem-solving</strong>{" "}
-            <u>where it matters most</u>?
+            2,700 repetitive tests per product, per year. Every hour an
+            engineer spends running them is an hour not spent on problems
+            that need an engineer.
           </p>
         </div>
 
@@ -173,17 +179,38 @@ export default function FodTestingPage() {
           <h2 id="results-h" className={`label ${styles.sectionLabel}`}>
             Results
           </h2>
-          <div className={styles.stats}>
-            {stats.map((s) => (
-              <div key={s.label} className={styles.stat}>
-                <span className={styles.statValue}>{s.value}</span>
-                <span className={styles.statLabel}>{s.label}</span>
-                <span className={`caption ${styles.statCaption}`}>
-                  {s.caption}
-                </span>
-              </div>
-            ))}
-          </div>
+          <table className={styles.compareTable}>
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span className={styles.srOnly}>Metric</span>
+                </th>
+                <th scope="col">Manual</th>
+                <th scope="col">Automated</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparison.map((row) => (
+                <tr key={row.metric}>
+                  <th scope="row" className={styles.compareMetric}>
+                    {row.metric}
+                  </th>
+                  <td className={styles.compareManual}>{row.manual}</td>
+                  <td className={styles.compareAuto}>{row.automated}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className={`caption ${styles.tableNote}`}>
+            108 tests was the practical ceiling for a team of three — running
+            the full 2,700-test matrix manually would take 75 days per
+            product. Automation runs all of it in one.
+          </p>
+          <p className={`caption ${styles.tableNote}`}>
+            Built as internal tooling on Apple&apos;s product safety team, so
+            the hardware and source aren&apos;t public. Happy to walk through
+            the design in conversation.
+          </p>
         </section>
 
         {/* contact */}

@@ -54,7 +54,29 @@
   margin-bottom: var(--space-4);
 }
 
-.heroBadge { display: block; }
+.heroMeta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin: 0;
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.heroMetaItem { min-width: 0; }
+
+.heroMetaLabel {
+  font-size: 0.6875rem;
+  margin-bottom: var(--space-2);
+}
+
+.heroMetaValue {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
 
 .heroImage {
   flex-shrink: 0;
@@ -201,6 +223,11 @@
   margin-bottom: var(--space-1);
 }
 
+.capTech {
+  color: var(--slate);
+  margin-left: var(--space-2);
+}
+
 .capTitle {
   font-size: 1.0625rem;
   font-weight: 600;
@@ -217,19 +244,79 @@
 }
 
 /* ── architecture diagram ────────────────────────────────────────────── */
-.archImg {
+.flowPlaceholder {
   width: 100%;
-  height: auto;
-  border-radius: 14px;
+  height: clamp(420px, 70vh, 640px);
+  border-radius: var(--r-md);
   border: 1px solid var(--hairline);
-  display: block;
+  background: var(--mist);
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+.legendLine {
+  color: var(--slate);
+  letter-spacing: -0.05em;
 }
 
 .stackRow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+/* ── decisions ───────────────────────────────────────────────────────── */
+.decisions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6) var(--space-8);
+}
+
+.decision {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.decisionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin-bottom: var(--space-3);
+}
+
+.decisionDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
 }
 
 .stackBadge {
@@ -296,6 +383,11 @@
     display: none;
   }
 
+  .heroMeta {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-4);
+  }
+
   .crisisGrid {
     grid-template-columns: 1fr;
     gap: var(--space-4);
@@ -307,6 +399,11 @@
   }
 
   .capabilities {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .decisions {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
