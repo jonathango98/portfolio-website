@@ -244,45 +244,24 @@
 }
 
 /* ── architecture diagram ────────────────────────────────────────────── */
-.flowPlaceholder {
+.archLink {
+  display: block;
+}
+
+.archImg {
   width: 100%;
-  height: clamp(420px, 70vh, 640px);
-  border-radius: var(--r-md);
+  height: auto;
+  border-radius: 14px;
   border: 1px solid var(--hairline);
-  background: var(--mist);
+  display: block;
 }
 
-.legend {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin-top: var(--space-4);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3) var(--space-5);
-}
-
-.legendItem {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
+.archCaption {
+  margin: var(--space-2) 0 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   color: var(--slate);
-}
-
-.legendSwatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  border: 1px solid;
-  flex-shrink: 0;
-}
-
-.legendLine {
-  color: var(--slate);
-  letter-spacing: -0.05em;
 }
 
 .stackRow {

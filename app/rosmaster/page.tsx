@@ -1,7 +1,6 @@
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
-import RosmasterFlowWrapper from "@/components/RosmasterFlowWrapper";
 import styles from "./page.module.css";
 
 export const metadata = { title: "Autonomous SAR Rover — Jonathan Goenadibrata" };
@@ -223,32 +222,23 @@ export default function RosmasterPage() {
           <p className={styles.sectionIntro}>
             The full ROS 2 node graph. Sensors feed the mapping and
             detection pipelines; both converge on a master script that
-            plans navigation and commands the rescue tool. Drag to pan,
-            zoom with the controls.
+            plans navigation and commands the rescue tool.
           </p>
-          <RosmasterFlowWrapper />
-          <ul className={styles.legend} aria-label="Diagram legend">
-            <li className={styles.legendItem}>
-              <span className={styles.legendSwatch} style={{ background: "#f0fdf4", borderColor: "#86efac" }} />
-              Sensor
-            </li>
-            <li className={styles.legendItem}>
-              <span className={styles.legendSwatch} style={{ background: "#eff6ff", borderColor: "#93c5fd" }} />
-              Processing
-            </li>
-            <li className={styles.legendItem}>
-              <span className={styles.legendSwatch} style={{ background: "#fefce8", borderColor: "#fde047" }} />
-              Actuator
-            </li>
-            <li className={styles.legendItem}>
-              <span className={styles.legendLine} aria-hidden="true">—</span>
-              ROS topic
-            </li>
-            <li className={styles.legendItem}>
-              <span className={styles.legendLine} aria-hidden="true">- -</span>
-              Launch / init
-            </li>
-          </ul>
+          <a
+            href="/images/rosmaster-software-architecture.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.archLink}
+          >
+            <Image
+              src="/images/rosmaster-software-architecture.jpg"
+              alt="ROSMASTER software architecture diagram showing the ROS2 node graph"
+              width={8823}
+              height={5553}
+              className={styles.archImg}
+            />
+          </a>
+          <p className={styles.archCaption}>Click to open full size</p>
           <div className={styles.stackRow}>
             {stack.map((s) => (
               <span key={s} className={styles.stackBadge}>{s}</span>
