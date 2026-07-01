@@ -25,8 +25,8 @@ const work = [
     title: "TriFinger Manipulation",
     hardware: "9-DOF, built in-house",
     desc: "Low-cost dexterous manipulation platform.",
-    href: "https://sites.google.com/eng.ucsd.edu/156b-2021-winter-team03/home_1",
-    external: true,
+    href: "/trifinger",
+    external: false,
     img: "/images/robot-trifinger.png",
   },
 ];
