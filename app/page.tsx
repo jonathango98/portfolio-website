@@ -57,17 +57,23 @@ const experience = [
 const projects = [
   {
     title: "The List",
-    desc: "A personal guide to the exact dishes to order in LA, SF, NY & Seattle.",
+    emoji: "🍜",
+    type: "live",
+    desc: "The exact dishes to order in LA, SF, NY & Seattle.",
     href: "https://jogo-menu.netlify.app",
   },
   {
     title: "Photobooth",
-    desc: "Web app: capture, template, and generate QR codes.",
+    emoji: "📸",
+    type: "live",
+    desc: "Capture, template, and generate QR codes.",
     href: "https://jogo-photobooth.netlify.app",
   },
   {
     title: "Snake AI",
-    desc: "Python Snake for training reinforcement-learning agents.",
+    emoji: "🐍",
+    type: "repo",
+    desc: "RL training environment for Snake agents.",
     href: "https://github.com/jonathango98/snake-game/",
   },
 ];
@@ -197,12 +203,28 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <span className={styles.miniEmoji} aria-hidden="true">
+                    {p.emoji}
+                  </span>
                   <span className={styles.miniTitle}>{p.title}</span>
+                  <span
+                    className={`caption ${styles.miniStatus} ${
+                      p.type === "live" ? styles.isLive : ""
+                    }`}
+                  >
+                    {p.type}
+                  </span>
                   <span className={styles.miniDesc}>{p.desc}</span>
+                  <span className={styles.miniArrow} aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
+          <p className={`caption ${styles.miniLegend}`}>
+            live = running now · repo = source
+          </p>
         </section>
 
         <section id="contact" className={styles.section} aria-labelledby="ct-h">
