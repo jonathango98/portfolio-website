@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://jonathango.xyz";
+import { SITE_URL } from "./site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/rosmaster", "/trifinger", "/fod-testing"];
 
   return routes.map((route) => ({
-    url: `${BASE_URL}${route}`,
+    url: `${SITE_URL}${route}`,
     lastModified: new Date(),
   }));
 }
