@@ -1,9 +1,24 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export const metadata = { title: "Autonomous SAR Rover — Jonathan Goenadibrata" };
+const description =
+  "UC Berkeley M.Eng capstone: an autonomous ROS 2 rover that uses SLAM and exploration to map disaster interiors, detect survivors, and deliver first aid.";
+
+export const metadata: Metadata = {
+  title: "Autonomous SAR Rover",
+  description,
+  alternates: {
+    canonical: "/rosmaster",
+  },
+  openGraph: {
+    title: "Autonomous SAR Rover — Jonathan Goenadibrata",
+    description,
+    url: "/rosmaster",
+  },
+};
 
 const heroMeta = [
   { label: "Context", value: "UC Berkeley M.Eng Capstone · 2024–25" },

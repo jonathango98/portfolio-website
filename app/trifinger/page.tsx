@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,10 +7,20 @@ import styles from "./page.module.css";
 const SITE_URL =
   "https://sites.google.com/eng.ucsd.edu/156b-2021-winter-team03/home_1";
 
-export const metadata = {
-  title: "TriFinger Manipulation — Jonathan Goenadibrata",
-  description:
-    "A low-cost, 9-DOF three-fingered robotic manipulator built in-house at UC San Diego as a dexterous manipulation platform for robotics and RL research.",
+const description =
+  "A low-cost, 9-DOF three-fingered robotic manipulator built in-house at UC San Diego as a dexterous manipulation platform for robotics and RL research.";
+
+export const metadata: Metadata = {
+  title: "TriFinger Manipulation",
+  description,
+  alternates: {
+    canonical: "/trifinger",
+  },
+  openGraph: {
+    title: "TriFinger Manipulation — Jonathan Goenadibrata",
+    description,
+    url: "/trifinger",
+  },
 };
 
 const principles: { title: string; desc: string }[] = [

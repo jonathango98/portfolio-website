@@ -1,12 +1,23 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export const metadata = {
-  title: "Foreign Object Detection — Jonathan Goenadibrata",
-  description:
-    "Robotic automation of Apple's wireless-charging foreign-object safety tests: 2,700 tests per product run unattended, cutting manual labor 96%.",
+const description =
+  "Robotic automation of Apple's wireless-charging foreign-object safety tests: 2,700 tests per product run unattended, cutting manual labor 96%.";
+
+export const metadata: Metadata = {
+  title: "Foreign Object Detection",
+  description,
+  alternates: {
+    canonical: "/fod-testing",
+  },
+  openGraph: {
+    title: "Foreign Object Detection — Jonathan Goenadibrata",
+    description,
+    url: "/fod-testing",
+  },
 };
 
 const volumeCards = [
