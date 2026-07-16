@@ -129,6 +129,7 @@ export default async function Life() {
                     height={p.height}
                     sizes="(max-width: 520px) 92vw, (max-width: 880px) 46vw, 280px"
                     className={styles.photo}
+                    draggable={false}
                   />
                 </li>
               ))}

@@ -119,6 +119,9 @@
 .galleryItem {
   break-inside: avoid;
   margin-bottom: var(--space-4);
+  /* deter casual saving: long-press callout (iOS) and selection */
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .photo {
@@ -127,6 +130,9 @@
   height: auto;
   border-radius: var(--r-sm);
   background: var(--mist);
+  /* right-click lands on the list item, so no "Save image as…" menu */
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 /* ---------- contact ---------- */
