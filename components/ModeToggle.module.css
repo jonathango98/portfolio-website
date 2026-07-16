@@ -1,0 +1,38 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.seg {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--slate);
+  padding: 5px 10px;
+  border-radius: 999px;
+  transition: color var(--t-fast) var(--ease-out),
+    background var(--t-fast) var(--ease-out);
+}
+
+.seg:hover {
+  color: var(--ink);
+}
+
+.seg[aria-current="page"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+@media (max-width: 520px) {
+  .seg {
+    padding: 4px 8px;
+    font-size: 0.625rem;
+  }
+}

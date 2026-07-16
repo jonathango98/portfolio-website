@@ -1,13 +1,21 @@
-import ThemeToggle from "./ThemeToggle";
+import ModeToggle, { type Mode } from "./ModeToggle";
 import styles from "./Nav.module.css";
 
-const links = [
+type NavLink = { label: string; href: string };
+
+const workLinks: NavLink[] = [
   { label: "Robots", href: "/#work" },
   { label: "Experience", href: "/#experience" },
   { label: "Contact", href: "/#contact" },
 ];
 
-export default function Nav() {
+export default function Nav({
+  links = workLinks,
+  mode = "work",
+}: {
+  links?: NavLink[];
+  mode?: Mode;
+}) {
   return (
     <header className={styles.nav}>
       <div className={styles.inner}>
@@ -25,7 +33,7 @@ export default function Nav() {
               </li>
             ))}
             <li>
-              <ThemeToggle />
+              <ModeToggle mode={mode} />
             </li>
           </ul>
         </nav>

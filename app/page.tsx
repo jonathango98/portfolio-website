@@ -129,6 +129,26 @@ export default function Home() {
           </div>
         </header>
 
+        <section id="about" className={styles.section} aria-labelledby="about-h">
+          <h2 id="about-h" className={`label ${styles.sectionLabel}`}>
+            About
+          </h2>
+          <p className={styles.aboutGreeting}>
+            Hi I&apos;m Jonathan <span aria-hidden="true">👋</span>
+          </p>
+          <p className={styles.aboutBody}>
+            I got into robotics because I believe the tedious parts of life
+            shouldn&apos;t need a human. My goal is to make everything a push
+            of a button — so people can spend their time on what they&apos;re{" "}
+            <a href="/life" className={styles.aboutLink}>
+              passionate
+            </a>{" "}
+            about, not on the things they merely have to do.
+            That&apos;s what drives every project I take on. Welcome to the
+            fruit of my passion.
+          </p>
+        </section>
+
         <section id="work" className={styles.section} aria-labelledby="work-h">
           <h2 id="work-h" className={`label ${styles.sectionLabel}`}>
             ROBOTS

@@ -42,17 +42,21 @@
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
+/* Life mode — warm & personal. Scoped to the /life page wrapper. */
+[data-mode="life"] {
+  --paper: #faf6ef;
+  --mist: #f3ecdf;
+  --ink: #2b2118;
+  --slate: #8a7a68;
+  --hairline: #e7ddcc;
+  --signal: #c07a1d;
+  --signal-wash: #f7ead2;
+  --nav-bg: rgba(250, 246, 239, 0.82);
+}
 
-  --paper: #0d1117;
-  --mist: #161b22;
-  --ink: #e6edf3;
-  --slate: #8b949e;
-  --hairline: #21262d;
-  --signal: #ff6a4d;
-  --signal-wash: #2a120c;
-  --nav-bg: rgba(13, 17, 23, 0.82);
+/* Cover the overscroll area behind the life wrapper */
+body:has([data-mode="life"]) {
+  background: #faf6ef;
 }
 
 *,
@@ -74,8 +78,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background var(--t-base) var(--ease-out),
-    color var(--t-base) var(--ease-out);
 }
 
 h1,
