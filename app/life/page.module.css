@@ -112,13 +112,12 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  columns: 3;
-  column-gap: var(--space-4);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
 }
 
 .galleryItem {
-  break-inside: avoid;
-  margin-bottom: var(--space-4);
   /* deter casual saving: long-press callout (iOS) and selection */
   -webkit-touch-callout: none;
   user-select: none;
@@ -182,12 +181,12 @@
 
 @media (max-width: 880px) {
   .gallery {
-    columns: 2;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 520px) {
   .gallery {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
 }
