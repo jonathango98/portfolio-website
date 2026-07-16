@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { imageSizeFromFile } from "image-size/fromFile";
 import Nav from "@/components/Nav";
+import PhotoGallery from "@/components/PhotoGallery";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -118,23 +119,7 @@ export default async function Life() {
             GEAR — Olympus OM-D E-M1 · Olympus 45mm f/1.8 · Olympus 17mm f/2.8
             · Retropia 32mm f/11
           </p>
-          {photos.length > 0 && (
-            <ul className={styles.gallery}>
-              {photos.map((p) => (
-                <li key={p.src} className={styles.galleryItem}>
-                  <Image
-                    src={p.src}
-                    alt=""
-                    width={p.width}
-                    height={p.height}
-                    sizes="(max-width: 520px) 92vw, (max-width: 880px) 46vw, 280px"
-                    className={styles.photo}
-                    draggable={false}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+          {photos.length > 0 && <PhotoGallery photos={photos} />}
         </section>
 
         <section id="contact" className={styles.section} aria-labelledby="ct-h">

@@ -108,32 +108,6 @@
   margin-bottom: var(--space-6);
 }
 
-.gallery {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-}
-
-.galleryItem {
-  /* deter casual saving: long-press callout (iOS) and selection */
-  -webkit-touch-callout: none;
-  user-select: none;
-}
-
-.photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--r-sm);
-  background: var(--mist);
-  /* right-click lands on the list item, so no "Save image as…" menu */
-  pointer-events: none;
-  -webkit-user-drag: none;
-}
-
 /* ---------- contact ---------- */
 .contactLead {
   font-size: clamp(1.25rem, 3vw, 1.75rem);
@@ -179,14 +153,3 @@
   padding-top: clamp(48px, 8vw, 80px);
 }
 
-@media (max-width: 880px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 520px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-}
