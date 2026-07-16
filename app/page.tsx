@@ -60,14 +60,14 @@ const projects = [
     emoji: "🍜",
     type: "live",
     desc: "The exact dishes to order in LA, SF, NY & Seattle.",
-    href: "https://jogo-menu.netlify.app",
+    href: "https://foodie.jonathango.xyz",
   },
   {
     title: "Photobooth",
     emoji: "📸",
     type: "live",
     desc: "Capture, template, and generate QR codes.",
-    href: "https://jogo-photobooth.netlify.app",
+    href: "https://photobooth.jonathango.xyz",
   },
   {
     title: "Snake AI",
