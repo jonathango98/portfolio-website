@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import styles from "./ModeToggle.module.css";
 
 export type Mode = "work" | "life";

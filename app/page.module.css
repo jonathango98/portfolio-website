@@ -27,6 +27,10 @@
 .hero > * {
   animation: rise var(--t-slow) var(--ease-out) both;
 }
+/* Skip the entrance when arriving via the Work/Life crossfade */
+:global(html.navigated) .hero > * {
+  animation: none;
+}
 .eyebrow {
   animation-delay: 0ms;
 }

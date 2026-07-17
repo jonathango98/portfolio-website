@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { ViewTransitions } from "next-view-transitions";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { SITE_URL } from "./site";
+import NavigationFlag from "@/components/NavigationFlag";
 
 const SITE_NAME = "Jonathan Goenadibrata";
 const SITE_DESCRIPTION =
@@ -60,19 +62,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
-      </head>
-      <body>
-        <a className="skip-link" href="#main">
-          Skip to content
-        </a>
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          />
+        </head>
+        <body>
+          <NavigationFlag />
+          <a className="skip-link" href="#main">
+            Skip to content
+          </a>
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

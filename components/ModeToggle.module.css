@@ -1,4 +1,5 @@
 .toggle {
+  view-transition-name: mode-toggle;
   display: inline-flex;
   align-items: center;
   padding: 2px;
@@ -26,6 +27,7 @@
 }
 
 .seg[aria-current="page"] {
+  view-transition-name: mode-pill;
   background: var(--ink);
   color: var(--paper);
 }
