@@ -57,11 +57,184 @@
   color: var(--ink);
 }
 
+/* --- Mobile menu (≤520px) --------------------------------------------- */
+/* Above the breakpoint the button/scrim are hidden and .panel is a plain
+   wrapper, so desktop rendering is unchanged. */
+
+.menuButton,
+.scrim {
+  display: none;
+}
+
 @media (max-width: 520px) {
+  /* Hamburger — 44×44 hit area; negative margins keep the bar height and
+     optically align the 16px lines with the gutter edge. */
+  .menuButton {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    width: 44px;
+    height: 44px;
+    margin: -15px -14px -15px 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--slate);
+    cursor: pointer;
+    transition: color var(--t-fast) var(--ease-out);
+  }
+
+  .menuButton:hover {
+    color: var(--ink);
+  }
+
+  .menuLine {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 1px;
+    margin: -0.5px 0 0 -8px;
+    background: currentColor;
+    transition: transform var(--t-base) var(--ease-out);
+  }
+
+  .menuLine:first-of-type {
+    transform: translateY(-3px);
+  }
+
+  .menuLine:last-of-type {
+    transform: translateY(3px);
+  }
+
+  /* Morph to × by rotating the lines — no icon swap. */
+  .menuButton[aria-expanded="true"] .menuLine:first-of-type {
+    transform: rotate(45deg);
+  }
+
+  .menuButton[aria-expanded="true"] .menuLine:last-of-type {
+    transform: rotate(-45deg);
+  }
+
+  /* Invisible catch area over the faded strip left of the panel. */
+  .scrim {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1;
+  }
+
+  /* Slide-in panel — no card, no border, no shadow: the left edge is a
+     horizontal gradient fade (same trick as the design carousel). Covers
+     the bar too, so the × sits where the hamburger was.
+     Note: the header's backdrop-filter makes it the containing block for
+     fixed descendants; since the bar is pinned at top:0 spanning the full
+     width, viewport coordinates still line up. */
+  .panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 72vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-9) max(var(--gutter), env(safe-area-inset-right))
+      var(--gutter) var(--gutter);
+    background: linear-gradient(
+      to right,
+      rgb(from var(--paper) r g b / 0),
+      var(--paper) 28%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform var(--t-slow) var(--ease-out),
+      opacity var(--t-slow) var(--ease-out),
+      visibility 0s var(--t-slow);
+  }
+
+  .panel.open {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      transform var(--t-slow) var(--ease-out),
+      opacity var(--t-slow) var(--ease-out);
+  }
+
+  /* Links hang off the edge the panel came from. */
   .links {
+    flex-direction: column;
+    align-items: flex-end;
     gap: var(--space-5);
   }
+
   .link {
-    font-size: 0.6875rem;
+    font-size: 1rem;
+  }
+
+  /* Staggered link fade-in (40ms steps). Delays only apply on open, so
+     everything fades out together with the panel. */
+  .links li {
+    opacity: 0;
+    transform: translateX(8px);
+    transition:
+      opacity var(--t-base) var(--ease-out),
+      transform var(--t-base) var(--ease-out);
+  }
+
+  .open .links li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .open .links li:nth-child(2) {
+    transition-delay: 40ms;
+  }
+
+  .open .links li:nth-child(3) {
+    transition-delay: 80ms;
+  }
+
+  .open .links li:nth-child(4) {
+    transition-delay: 120ms;
+  }
+
+  .open .links li:nth-child(5) {
+    transition-delay: 160ms;
+  }
+
+  /* Mode toggle below the links — whitespace only, no rule. */
+  .modeItem {
+    margin-top: var(--space-5);
+  }
+}
+
+@media (max-width: 520px) and (prefers-reduced-motion: reduce) {
+  .panel {
+    transform: none;
+    transition:
+      opacity var(--t-fast) linear,
+      visibility 0s var(--t-fast);
+  }
+
+  .panel.open {
+    transition: opacity var(--t-fast) linear;
+  }
+
+  .links li,
+  .open .links li {
+    transform: none;
+    transition: none;
+    transition-delay: 0s;
   }
 }
