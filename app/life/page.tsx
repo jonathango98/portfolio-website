@@ -5,6 +5,7 @@ import Image from "next/image";
 import { imageSizeFromFile } from "image-size/fromFile";
 import Nav from "@/components/Nav";
 import PhotoGallery from "@/components/PhotoGallery";
+import DesignCarousel from "@/components/DesignCarousel";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -21,11 +22,22 @@ export const metadata: Metadata = {
 };
 
 const PHOTOS_DIR = path.join(process.cwd(), "public/images/photography");
+const DESIGNS_DIR = path.join(process.cwd(), "public/images/design");
 const IMAGE_EXT = /\.(jpe?g|png|webp|avif)$/i;
 
 const lifeLinks = [
   { label: "Photos", href: "/life#photography" },
+  { label: "Design", href: "/life#design" },
   { label: "Contact", href: "/life#contact" },
+];
+
+// Curated order; titles are used as alt text. Dimensions are read
+// from the files.
+const designManifest = [
+  { file: "love.jpg", title: "爱 — Love" },
+  { file: "the-go-blog.png", title: "the.go.blog" },
+  { file: "marketplace-ministry.jpg", title: "Marketplace Ministry" },
+  { file: "southbound.jpg", title: "Southbound" },
 ];
 
 const socials = [
@@ -62,8 +74,24 @@ async function getPhotos() {
   );
 }
 
+async function getDesigns() {
+  const designs = await Promise.all(
+    designManifest.map(async ({ file, title }) => {
+      try {
+        const { width = 1, height = 1 } = await imageSizeFromFile(
+          path.join(DESIGNS_DIR, file)
+        );
+        return { src: `/images/design/${file}`, title, width, height };
+      } catch {
+        return null;
+      }
+    })
+  );
+  return designs.filter((d) => d !== null);
+}
+
 export default async function Life() {
-  const photos = await getPhotos();
+  const [photos, designs] = await Promise.all([getPhotos(), getDesigns()]);
 
   return (
     <div data-mode="life" className={styles.lifeRoot}>
@@ -120,6 +148,17 @@ export default async function Life() {
             · Retropia 32mm f/11
           </p>
           {photos.length > 0 && <PhotoGallery photos={photos} />}
+        </section>
+
+        <section
+          id="design"
+          className={styles.section}
+          aria-labelledby="design-h"
+        >
+          <h2 id="design-h" className={`label ${styles.sectionLabel}`}>
+            Design
+          </h2>
+          {designs.length > 0 && <DesignCarousel designs={designs} />}
         </section>
 
         <section id="contact" className={styles.section} aria-labelledby="ct-h">

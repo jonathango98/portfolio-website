@@ -1,0 +1,109 @@
+.carousel {
+  --slide-w: min(420px, 68vw);
+  --step: calc(var(--slide-w) * 0.85);
+}
+
+/* ---------- stage ---------- */
+.viewport {
+  position: relative;
+  height: var(--slide-w);
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* side fades: keep the arrows on (mostly) solid paper */
+.viewport::before,
+.viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(72px, 14vw, 140px);
+  z-index: 2;
+  pointer-events: none;
+}
+.viewport::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--paper),
+    rgb(from var(--paper) r g b / 0)
+  );
+}
+.viewport::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--paper),
+    rgb(from var(--paper) r g b / 0)
+  );
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--slide-w);
+  height: 100%;
+  margin-left: calc(var(--slide-w) / -2);
+  transform: translateX(calc(var(--offset) * var(--step)))
+    scale(var(--scale, 1));
+  transition: transform var(--t-slow) var(--ease-out),
+    opacity var(--t-slow) var(--ease-out);
+}
+
+.slide[data-pos="center"] {
+  /* above the side fades so the highlight never gets washed */
+  z-index: 3;
+}
+
+.slide[data-pos="near"] {
+  --scale: 0.82;
+  opacity: 0.35;
+  cursor: pointer;
+}
+
+.slide[data-pos="edge"] {
+  --scale: 0.82;
+  opacity: 0;
+}
+
+.artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  -webkit-user-drag: none;
+}
+
+/* ---------- arrows (match the photo gallery's expand chevron) ---------- */
+.control {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--slate);
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.control:hover {
+  color: var(--ink);
+}
+
+.prev {
+  left: 0;
+}
+.next {
+  right: 0;
+}
