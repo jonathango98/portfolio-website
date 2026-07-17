@@ -204,16 +204,7 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 880px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 520px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
   .prev,
   .next {
     top: auto;
