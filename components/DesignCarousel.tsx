@@ -96,7 +96,7 @@ export default function DesignCarousel({ designs: initial }: { designs: Design[]
                 alt={offset === 0 ? design.title : ""}
                 width={design.width}
                 height={design.height}
-                sizes="(max-width: 600px) 72vw, 420px"
+                sizes="(max-width: 600px) 60vw, 420px"
                 className={styles.artwork}
                 draggable={false}
               />

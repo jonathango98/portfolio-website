@@ -107,3 +107,10 @@
 .next {
   right: 0;
 }
+
+@media (max-width: 520px) {
+  .carousel {
+    --slide-w: 56vw;
+    --step: calc(var(--slide-w) * 1.05);
+  }
+}
