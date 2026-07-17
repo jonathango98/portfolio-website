@@ -1,3 +1,5 @@
+"use client";
+
 import ModeToggle, { type Mode } from "./ModeToggle";
 import styles from "./Nav.module.css";
 
@@ -8,6 +10,19 @@ const workLinks: NavLink[] = [
   { label: "Experience", href: "/#experience" },
   { label: "Contact", href: "/#contact" },
 ];
+
+function handleAnchorClick(
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+) {
+  const [path, hash] = href.split("#");
+  if (!hash || window.location.pathname !== (path || "/")) return;
+  const target = document.getElementById(hash);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView();
+  history.pushState(null, "", `#${hash}`);
+}
 
 export default function Nav({
   links = workLinks,
@@ -27,7 +42,11 @@ export default function Nav({
           <ul className={styles.links}>
             {links.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className={styles.link}>
+                <a
+                  href={l.href}
+                  className={styles.link}
+                  onClick={(e) => handleAnchorClick(e, l.href)}
+                >
                   {l.label}
                 </a>
               </li>

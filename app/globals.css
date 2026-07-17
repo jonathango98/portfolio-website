@@ -67,6 +67,8 @@ body:has([data-mode="life"]) {
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px; /* keep anchor targets clear of the fixed nav */
 }
 
 body {
