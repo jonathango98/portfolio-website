@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./DesignCarousel.module.css";
 
@@ -18,7 +18,26 @@ const WINDOW = [-2, -1, 0, 1, 2];
 
 const mod = (n: number, m: number) => ((n % m) + m) % m;
 
-export default function DesignCarousel({ designs }: { designs: Design[] }) {
+const useIsoLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+function shuffle<T>(items: T[]): T[] {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+export default function DesignCarousel({ designs: initial }: { designs: Design[] }) {
+  // Server HTML renders the given order; reshuffle per visit after
+  // hydration (pre-paint) so the markup matches during hydration.
+  const [designs, setDesigns] = useState(initial);
+  useIsoLayoutEffect(() => {
+    setDesigns(shuffle(initial));
+  }, [initial]);
+
   // Unbounded position: mod picks the design, and using it in slide keys
   // lets React keep each slide's DOM as the window shifts, so the CSS
   // transform transition carries slides between positions.
