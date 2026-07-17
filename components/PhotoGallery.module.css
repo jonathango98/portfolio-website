@@ -40,6 +40,61 @@
   opacity: 0.88;
 }
 
+/* ---------- collapsed preview ---------- */
+.galleryClip {
+  position: relative;
+  /* clip (not hidden) so focusing an offscreen thumb can't scroll the box */
+  overflow: clip;
+  transition: max-height var(--t-slow) var(--ease-out);
+}
+
+.galleryClip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--fade-h, 0px);
+  background: linear-gradient(
+    to bottom,
+    rgb(from var(--paper) r g b / 0),
+    var(--paper)
+  );
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-out);
+}
+
+.galleryClip[data-expanded]::after {
+  opacity: 0;
+}
+
+.expandToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: var(--space-4) auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--slate);
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.expandToggle:hover {
+  color: var(--ink);
+}
+
+.expandToggle svg {
+  transition: transform var(--t-base) var(--ease-out);
+}
+
+.expandToggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
 /* ---------- lightbox ---------- */
 @keyframes fadeIn {
   from {

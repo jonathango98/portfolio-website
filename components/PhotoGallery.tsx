@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import styles from "./PhotoGallery.module.css";
 
@@ -12,12 +18,38 @@ export type Photo = {
 
 const ZOOM = 2.5;
 const DRAG_THRESHOLD = 6;
+// How much of row 3 stays visible (and fades out) while collapsed.
+const PEEK_RATIO = 0.5;
+
+const useIsoLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+type Clip = { collapsed: number; full: number; fade: number };
+
+function shuffle<T>(items: T[]): T[] {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function PhotoGallery({ photos }: { photos: Photo[] }) {
+  // Server HTML renders the sorted order; reshuffle per visit after
+  // hydration (pre-paint) so the markup matches during hydration.
+  const [ordered, setOrdered] = useState(photos);
+  useIsoLayoutEffect(() => {
+    setOrdered(shuffle(photos));
+  }, [photos]);
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [expanded, setExpanded] = useState(false);
+  const [clip, setClip] = useState<Clip | null>(null);
 
+  const listRef = useRef<HTMLUListElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
@@ -31,7 +63,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   } | null>(null);
 
   const open = openIndex !== null;
-  const photo = open ? photos[openIndex] : null;
+  const photo = open ? ordered[openIndex] : null;
 
   const resetView = useCallback(() => {
     setZoomed(false);
@@ -48,11 +80,11 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   const step = useCallback(
     (dir: 1 | -1) => {
       setOpenIndex((i) =>
-        i === null ? i : (i + dir + photos.length) % photos.length
+        i === null ? i : (i + dir + ordered.length) % ordered.length
       );
       resetView();
     },
-    [photos.length, resetView]
+    [ordered.length, resetView]
   );
 
   // Keep a zoomed image's edges pinned to the viewport edges.
@@ -136,35 +168,112 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
     };
   }, [open, close, step]);
 
+  // Find where grid row 3 starts so the collapsed gallery can clip mid-row.
+  // Row heights vary with each photo's aspect ratio and the column count
+  // changes with the viewport, so this has to be measured, not computed.
+  useIsoLayoutEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const measure = () => {
+      const listTop = list.getBoundingClientRect().top;
+      let rows = 0;
+      let lastTop = -Infinity;
+      let row3: DOMRect | null = null;
+      for (const item of Array.from(list.children)) {
+        const rect = item.getBoundingClientRect();
+        if (rect.top - listTop - lastTop > 1) {
+          rows += 1;
+          lastTop = rect.top - listTop;
+          if (rows === 3) {
+            row3 = rect;
+            break;
+          }
+        }
+      }
+      if (!row3) {
+        setClip(null);
+        return;
+      }
+      const peek = row3.height * PEEK_RATIO;
+      setClip({
+        collapsed: row3.top - listTop + peek,
+        full: list.offsetHeight,
+        fade: peek,
+      });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(list);
+    return () => ro.disconnect();
+  }, [ordered]);
+
   const blockMenu = (e: React.SyntheticEvent) => e.preventDefault();
 
   return (
     <>
-      <ul className={styles.gallery} onContextMenu={blockMenu}>
-        {photos.map((p, i) => (
-          <li key={p.src} className={styles.galleryItem}>
-            <button
-              type="button"
-              className={styles.thumbButton}
-              aria-label={`View photo ${i + 1} of ${photos.length}`}
-              onClick={(e) => {
-                lastTriggerRef.current = e.currentTarget;
-                setOpenIndex(i);
-              }}
-            >
-              <Image
-                src={p.src}
-                alt=""
-                width={p.width}
-                height={p.height}
-                sizes="(max-width: 520px) 92vw, (max-width: 880px) 46vw, 280px"
-                className={styles.photo}
-                draggable={false}
-              />
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div
+        className={styles.galleryClip}
+        data-expanded={expanded || undefined}
+        style={
+          clip
+            ? ({
+                maxHeight: expanded ? clip.full : clip.collapsed,
+                "--fade-h": `${clip.fade}px`,
+              } as React.CSSProperties)
+            : undefined
+        }
+      >
+        <ul ref={listRef} className={styles.gallery} onContextMenu={blockMenu}>
+          {ordered.map((p, i) => (
+            <li key={p.src} className={styles.galleryItem}>
+              <button
+                type="button"
+                className={styles.thumbButton}
+                aria-label={`View photo ${i + 1} of ${ordered.length}`}
+                onClick={(e) => {
+                  lastTriggerRef.current = e.currentTarget;
+                  setOpenIndex(i);
+                }}
+              >
+                <Image
+                  src={p.src}
+                  alt=""
+                  width={p.width}
+                  height={p.height}
+                  sizes="(max-width: 520px) 92vw, (max-width: 880px) 46vw, 280px"
+                  className={styles.photo}
+                  draggable={false}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {clip && (
+        <button
+          type="button"
+          className={styles.expandToggle}
+          aria-expanded={expanded}
+          aria-label={
+            expanded
+              ? "Show fewer photos"
+              : `Show all ${ordered.length} photos`
+          }
+          onClick={() => setExpanded((e) => !e)}
+        >
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+            <path
+              d="M3 7l7 6 7-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
 
       {open && photo && (
         <div
@@ -172,7 +281,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           className={styles.overlay}
           role="dialog"
           aria-modal="true"
-          aria-label={`Photo ${openIndex + 1} of ${photos.length}`}
+          aria-label={`Photo ${openIndex + 1} of ${ordered.length}`}
           tabIndex={-1}
           onContextMenu={blockMenu}
           onDragStart={blockMenu}
@@ -216,7 +325,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           >
             ×
           </button>
-          {photos.length > 1 && (
+          {ordered.length > 1 && (
             <>
               <button
                 type="button"
@@ -237,7 +346,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
             </>
           )}
           <span className={styles.counter} aria-hidden="true">
-            {openIndex + 1} / {photos.length}
+            {openIndex + 1} / {ordered.length}
           </span>
         </div>
       )}
