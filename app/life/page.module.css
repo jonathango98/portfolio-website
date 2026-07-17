@@ -58,6 +58,7 @@
   overflow: hidden;
   margin-bottom: var(--space-6);
   background: var(--mist);
+  view-transition-name: portrait;
 }
 .portraitImg {
   object-fit: cover;
