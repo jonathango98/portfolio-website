@@ -1,2 +1,2 @@
-// Live deployment URL. The custom domain may change (~Oct 2026) — update here only.
-export const SITE_URL = "https://jonathango.netlify.app";
+// Live deployment URL — update here only (public/llms.txt hardcodes it too).
+export const SITE_URL = "https://jonathango.xyz";

@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     template: "%s — Jonathan Goenadibrata",
   },
   description: SITE_DESCRIPTION,
+  authors: [{ name: "Jonathan Goenadibrata", url: SITE_URL }],
+  creator: "Jonathan Goenadibrata",
   alternates: {
     canonical: "/",
   },
@@ -44,16 +46,54 @@ export const metadata: Metadata = {
   },
 };
 
+const PERSON_ID = `${SITE_URL}/#person`;
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: "Jonathan Goenadibrata",
   jobTitle: "Robotics Engineer",
+  description: SITE_DESCRIPTION,
   url: SITE_URL,
+  image: `${SITE_URL}/images/headshot.jpg`,
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of California, Berkeley",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of California, San Diego",
+    },
+  ],
+  knowsAbout: [
+    "Robotics",
+    "ROS 2",
+    "SLAM",
+    "Motion Planning",
+    "Path Planning",
+    "Computer Vision",
+    "Sensor Fusion",
+    "Controls Engineering",
+    "Automation",
+    "CODESYS",
+    "Python",
+    "C++",
+  ],
   sameAs: [
     "https://www.linkedin.com/in/jonathangoenadibrata/",
     "https://github.com/jonathango98",
   ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Jonathan Goenadibrata",
+  url: SITE_URL,
+  publisher: { "@id": PERSON_ID },
+  about: { "@id": PERSON_ID },
 };
 
 export default function RootLayout({
@@ -67,7 +107,9 @@ export default function RootLayout({
         <head>
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify([personJsonLd, websiteJsonLd]),
+            }}
           />
         </head>
         <body>

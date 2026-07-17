@@ -8,16 +8,31 @@ import PhotoGallery from "@/components/PhotoGallery";
 import DesignCarousel from "@/components/DesignCarousel";
 import styles from "./page.module.css";
 
+const lifeDescription =
+  "The other side of the toggle — photography and life outside of work.";
+
+const heroImage = {
+  url: "/images/headshot-life.jpeg",
+  width: 3120,
+  height: 4160,
+  alt: "Jonathan Goenadibrata",
+};
+
 export const metadata: Metadata = {
   title: "Life",
-  description:
-    "The other side of the toggle — photography and life outside of work.",
+  description: lifeDescription,
   alternates: { canonical: "/life" },
   openGraph: {
     url: "/life",
     title: "Life — Jonathan Goenadibrata",
-    description:
-      "The other side of the toggle — photography and life outside of work.",
+    description: lifeDescription,
+    images: [heroImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Life — Jonathan Goenadibrata",
+    description: lifeDescription,
+    images: [heroImage.url],
   },
 };
 

@@ -1,0 +1,18 @@
+# Jonathan Goenadibrata
+
+> Robotics engineer building practical robots that make everyday life easier. Background: UC Berkeley M.Eng in Mechanical Engineering (2024–25), Safety Test Automation Engineer at Apple Inc. (2021–24), B.S. Mechanical Engineering (Controls & Robotics) at UC San Diego (2018–21). Works across ROS 2, SLAM, motion planning, computer vision, sensor fusion, controls, and industrial automation.
+
+## Pages
+
+- [Home](https://jonathango.xyz/): Introduction, education/experience timeline, and featured robotics projects.
+- [Life](https://jonathango.xyz/life): The personal side of the site — photography and life outside of work.
+- [Autonomous SAR Rover](https://jonathango.xyz/rosmaster): UC Berkeley M.Eng capstone — an autonomous ROS 2 rover (Yahboom RDK X3) that uses SLAM and frontier exploration to map disaster interiors, detect survivors, and deliver first aid via an electromagnetic arm.
+- [Foreign Object Detection Testing](https://jonathango.xyz/fod-testing): Robotic process automation built at Apple Inc. for wireless-charging safety testing — 2,700 tests per product run unattended, cutting manual labor 96%.
+- [TriFinger Manipulation](https://jonathango.xyz/trifinger): UC San Diego senior capstone — a low-cost, 9-DOF three-fingered robotic manipulator built in-house as a dexterous manipulation platform for robotics and RL research.
+
+## Contact
+
+- Email: jonathangoenadibrata@gmail.com
+- LinkedIn: https://www.linkedin.com/in/jonathangoenadibrata/
+- GitHub: https://github.com/jonathango98
+- Instagram: https://www.instagram.com/jonathango98/

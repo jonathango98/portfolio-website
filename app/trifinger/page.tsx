@@ -3,12 +3,20 @@ import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { SITE_URL } from "@/app/site";
 
-const SITE_URL =
+const PROJECT_SITE_URL =
   "https://sites.google.com/eng.ucsd.edu/156b-2021-winter-team03/home_1";
 
 const description =
   "A low-cost, 9-DOF three-fingered robotic manipulator built in-house at UC San Diego as a dexterous manipulation platform for robotics and RL research.";
+
+const heroImage = {
+  url: "/images/robot-trifinger.png",
+  width: 925,
+  height: 925,
+  alt: "TriFinger robot — three articulated fingers mounted above a shared workspace",
+};
 
 export const metadata: Metadata = {
   title: "TriFinger Manipulation",
@@ -20,7 +28,42 @@ export const metadata: Metadata = {
     title: "TriFinger Manipulation — Jonathan Goenadibrata",
     description,
     url: "/trifinger",
+    images: [heroImage],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "TriFinger Manipulation — Jonathan Goenadibrata",
+    description,
+    images: [heroImage.url],
+  },
+};
+
+const pageUrl = `${SITE_URL}/trifinger`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "TriFinger Manipulation",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "CreativeWork",
+      name: "TriFinger Manipulation",
+      description,
+      url: pageUrl,
+      image: `${SITE_URL}${heroImage.url}`,
+      author: { "@id": `${SITE_URL}/#person` },
+    },
+  ],
 };
 
 const principles: { title: string; desc: string }[] = [
@@ -56,6 +99,10 @@ const system: { title: string; desc: string }[] = [
 export default function TrifingerPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav />
       <main id="main" className={styles.page}>
         <Link href="/" className={styles.back}>
@@ -176,7 +223,7 @@ export default function TrifingerPage() {
             CAD models, reports, and videos — all on the project site.
           </p>
           <a
-            href={SITE_URL}
+            href={PROJECT_SITE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.siteButton}

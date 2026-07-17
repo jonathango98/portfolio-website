@@ -3,9 +3,17 @@ import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { SITE_URL } from "@/app/site";
 
 const description =
   "Robotic automation of Apple's wireless-charging foreign-object safety tests: 2,700 tests per product run unattended, cutting manual labor 96%.";
+
+const heroImage = {
+  url: "/images/fod.png",
+  width: 467,
+  height: 678,
+  alt: "Test setup: phone (receiver), foreign object, and wireless charger (transmitter)",
+};
 
 export const metadata: Metadata = {
   title: "Foreign Object Detection",
@@ -17,7 +25,42 @@ export const metadata: Metadata = {
     title: "Foreign Object Detection — Jonathan Goenadibrata",
     description,
     url: "/fod-testing",
+    images: [heroImage],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Foreign Object Detection — Jonathan Goenadibrata",
+    description,
+    images: [heroImage.url],
+  },
+};
+
+const pageUrl = `${SITE_URL}/fod-testing`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Foreign Object Detection",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "CreativeWork",
+      name: "Foreign Object Detection",
+      description,
+      url: pageUrl,
+      image: `${SITE_URL}${heroImage.url}`,
+      author: { "@id": `${SITE_URL}/#person` },
+    },
+  ],
 };
 
 const volumeCards = [
@@ -64,6 +107,10 @@ const socials = [
 export default function FodTestingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav />
       <main id="main" className={styles.page}>
         <Link href="/" className={styles.back}>

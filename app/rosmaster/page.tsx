@@ -3,9 +3,17 @@ import Nav from "@/components/Nav";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { SITE_URL } from "@/app/site";
 
 const description =
   "UC Berkeley M.Eng capstone: an autonomous ROS 2 rover that uses SLAM and exploration to map disaster interiors, detect survivors, and deliver first aid.";
+
+const heroImage = {
+  url: "/images/robot-sar.png",
+  width: 1024,
+  height: 1024,
+  alt: "Yahboom RDK X3 SAR robot with Mecanum wheels and front camera",
+};
 
 export const metadata: Metadata = {
   title: "Autonomous SAR Rover",
@@ -17,7 +25,42 @@ export const metadata: Metadata = {
     title: "Autonomous SAR Rover — Jonathan Goenadibrata",
     description,
     url: "/rosmaster",
+    images: [heroImage],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Autonomous SAR Rover — Jonathan Goenadibrata",
+    description,
+    images: [heroImage.url],
+  },
+};
+
+const pageUrl = `${SITE_URL}/rosmaster`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Autonomous SAR Rover",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "CreativeWork",
+      name: "Autonomous SAR Rover",
+      description,
+      url: pageUrl,
+      image: `${SITE_URL}${heroImage.url}`,
+      author: { "@id": `${SITE_URL}/#person` },
+    },
+  ],
 };
 
 const heroMeta = [
@@ -108,6 +151,10 @@ const socials = [
 export default function RosmasterPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav />
       <main id="main" className={styles.page}>
         <Link href="/" className={styles.back}>
