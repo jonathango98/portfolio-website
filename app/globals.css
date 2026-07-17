@@ -42,21 +42,24 @@
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Life mode — warm & personal. Scoped to the /life page wrapper. */
+/* Life mode — night. Scoped to the /life page wrapper. */
 [data-mode="life"] {
-  --paper: #faf6ef;
-  --mist: #f3ecdf;
-  --ink: #2b2118;
-  --slate: #8a7a68;
-  --hairline: #e7ddcc;
-  --signal: #c07a1d;
-  --signal-wash: #f7ead2;
-  --nav-bg: rgba(250, 246, 239, 0.82);
+  color-scheme: dark;
+
+  --paper: #10141d;
+  --mist: #1a2029;
+  --ink: #ece9e2;
+  --slate: #949daf;
+  --hairline: #262d3a;
+  --signal: #f5b04d;
+  --signal-wash: #2a2314;
+  --nav-bg: rgba(16, 20, 29, 0.82);
 }
 
 /* Cover the overscroll area behind the life wrapper */
 body:has([data-mode="life"]) {
-  background: #faf6ef;
+  color-scheme: dark;
+  background: #10141d;
 }
 
 *,
