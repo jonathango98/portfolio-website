@@ -5,7 +5,7 @@
 ## Pages
 
 - [Home](https://jonathango.xyz/): Introduction, education/experience timeline, and featured robotics projects.
-- [Life](https://jonathango.xyz/life): The personal side of the site — photography and life outside of work.
+- [Life](https://jonathango.xyz/life): The personal side of the site — known as "the engineer with design skills"; design, photography, and guitar for fun, plus time with friends talking about life and faith.
 - [Autonomous SAR Rover](https://jonathango.xyz/rosmaster): UC Berkeley M.Eng capstone — an autonomous ROS 2 rover (Yahboom RDK X3) that uses SLAM and frontier exploration to map disaster interiors, detect survivors, and deliver first aid via an electromagnetic arm.
 - [Foreign Object Detection Testing](https://jonathango.xyz/fod-testing): Robotic process automation built at Apple Inc. for wireless-charging safety testing — 2,700 tests per product run unattended, cutting manual labor 96%.
 - [TriFinger Manipulation](https://jonathango.xyz/trifinger): UC San Diego senior capstone — a low-cost, 9-DOF three-fingered robotic manipulator built in-house as a dexterous manipulation platform for robotics and RL research.

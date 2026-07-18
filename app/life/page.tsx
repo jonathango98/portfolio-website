@@ -9,7 +9,7 @@ import DesignCarousel from "@/components/DesignCarousel";
 import styles from "./page.module.css";
 
 const lifeDescription =
-  "The other side of the toggle — photography and life outside of work.";
+  "The other side of the toggle — design, photography, guitar, and time with friends talking life and faith.";
 
 const heroImage = {
   url: "/images/headshot-life.jpeg",
@@ -41,6 +41,7 @@ const DESIGNS_DIR = path.join(process.cwd(), "public/images/design");
 const IMAGE_EXT = /\.(jpe?g|png|webp|avif)$/i;
 
 const lifeLinks = [
+  { label: "About", href: "/life#about" },
   { label: "Photos", href: "/life#photography" },
   { label: "Design", href: "/life#design" },
   { label: "Contact", href: "/life#contact" },
@@ -149,6 +150,30 @@ export default async function Life() {
             </ul>
           </div>
         </header>
+
+        <section id="about" className={styles.section} aria-labelledby="about-h">
+          <h2 id="about-h" className={`label ${styles.sectionLabel}`}>
+            About
+          </h2>
+          <p className={styles.aboutBody}>
+            People like to call me the engineer with design skills. Off the
+            clock, that&apos;s the side I feed — designing, shooting photos,
+            and playing my guitar, purely for the fun of it.
+          </p>
+          <p className={styles.aboutBody}>
+            But what really fills my time is people. I&apos;m about as
+            extroverted as they come, so most evenings end up with friends —{" "}
+            <a
+              href="https://foodie.jonathango.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.aboutLink}
+            >
+              good food
+            </a>
+            , long conversations, usually drifting toward life and faith.
+          </p>
+        </section>
 
         <section
           id="photography"
