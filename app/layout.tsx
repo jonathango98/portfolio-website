@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
@@ -44,6 +44,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: ["/images/headshot.jpg"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 const PERSON_ID = `${SITE_URL}/#person`;
