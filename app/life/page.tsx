@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import { imageSizeFromFile } from "image-size/fromFile";
 import Nav from "@/components/Nav";
@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     description: lifeDescription,
     images: [heroImage.url],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#10141d",
 };
 
 const PHOTOS_DIR = path.join(process.cwd(), "public/images/photography");

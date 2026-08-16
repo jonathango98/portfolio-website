@@ -114,6 +114,7 @@
   justify-content: center;
   background: rgba(10, 12, 16, 0.92);
   animation: fadeIn var(--t-fast) var(--ease-out) both;
+  overscroll-behavior: contain;
   -webkit-touch-callout: none;
   user-select: none;
 }
