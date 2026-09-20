@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { SITE_URL } from "./site";
 import NavigationFlag from "@/components/NavigationFlag";
+import PageLoader from "@/components/PageLoader";
 
 const SITE_NAME = "Jonathan Goenadibrata";
 const SITE_DESCRIPTION =
@@ -107,7 +108,12 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <html
+        lang="en"
+        className={`${GeistSans.variable} ${GeistMono.variable}`}
+        // Held from the first paint; PageLoader clears it on reveal.
+        data-loading="true"
+      >
         <head>
           <script
             type="application/ld+json"
@@ -115,8 +121,21 @@ export default function RootLayout({
               __html: JSON.stringify([personJsonLd, websiteJsonLd]),
             }}
           />
+          {/* Without JS nothing ever clears the loading state, so undo it. */}
+          <noscript>
+            <style>{`
+              .site-loader { display: none !important; }
+              html[data-loading="true"] { overflow: visible; }
+              html[data-loading="true"] main *,
+              html[data-loading="true"] main *::before,
+              html[data-loading="true"] main *::after {
+                animation-play-state: running !important;
+              }
+            `}</style>
+          </noscript>
         </head>
         <body>
+          <PageLoader />
           <NavigationFlag />
           <a className="skip-link" href="#main">
             Skip to content

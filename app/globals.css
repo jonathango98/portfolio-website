@@ -253,3 +253,20 @@ a {
     animation: none !important;
   }
 }
+
+/* ---------- initial page load (see components/PageLoader.tsx) ---------- */
+
+/* The attribute is server-rendered on <html> and removed once the skeleton
+   starts fading, so the hold is already in place on the first paint. */
+html[data-loading="true"] {
+  overflow: hidden;
+}
+
+/* Hold the entrance animations at their first frame while the skeleton is
+   up, so the content actually animates in on reveal instead of having
+   played out behind the overlay. */
+html[data-loading="true"] main *,
+html[data-loading="true"] main *::before,
+html[data-loading="true"] main *::after {
+  animation-play-state: paused !important;
+}

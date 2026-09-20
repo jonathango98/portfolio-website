@@ -1,0 +1,218 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  overflow: hidden;
+  opacity: 1;
+  /* Lingers a beat after the placeholders have gone, so the paper lifts off
+     content that is already animating in rather than cutting to it. */
+  transition: opacity 620ms var(--ease-out) 180ms;
+}
+
+.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Placeholders dissolve first and drift up, in the same direction as the
+   hero's own entrance — the two reads as one movement. */
+.header,
+.frame {
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 460ms var(--ease-out);
+}
+.leaving .header,
+.leaving .frame {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* ---------- header ---------- */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 880px;
+  margin-inline: auto;
+  padding: 16px var(--gutter);
+}
+
+.monogram {
+  width: 24px;
+  height: 14px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+.navLink {
+  height: 11px;
+}
+.navLink:nth-child(1) {
+  width: 52px;
+}
+.navLink:nth-child(2) {
+  width: 78px;
+}
+.navLink:nth-child(3) {
+  width: 56px;
+}
+
+.toggle {
+  width: 104px;
+  height: 24px;
+  border-radius: 999px;
+}
+
+.menuButton {
+  display: none;
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* ---------- the shimmering placeholder ---------- */
+@keyframes sweep {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.block {
+  display: block;
+  border-radius: var(--r-sm);
+  background: linear-gradient(
+      90deg,
+      var(--mist) 0%,
+      var(--hairline) 50%,
+      var(--mist) 100%
+    )
+    0 0 / 200% 100%;
+  animation: sweep 2.8s linear infinite;
+}
+
+/* ---------- hero silhouette ---------- */
+.frame {
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-top: clamp(120px, 22vh, 200px);
+}
+
+.portrait {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--r-md);
+  margin-bottom: var(--space-6);
+}
+
+.eyebrow {
+  width: 140px;
+  height: 12px;
+  margin-bottom: var(--space-4);
+}
+
+.nameLine,
+.nameLineShort {
+  height: clamp(2.5rem, 10vw, 5.5rem);
+  margin-bottom: var(--space-2);
+  border-radius: var(--r-md);
+}
+.nameLine {
+  width: min(58%, 420px);
+}
+.nameLineShort {
+  width: min(74%, 540px);
+  margin-bottom: var(--space-5);
+}
+
+.tagline {
+  width: min(70%, 380px);
+  height: 20px;
+  margin-bottom: var(--space-6);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-bottom: clamp(72px, 12vw, 128px);
+}
+.pill {
+  width: 80px;
+  height: 14px;
+}
+
+/* ---------- work rows ---------- */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.thumb {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--r-md);
+}
+
+.rowText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.rowTitle {
+  width: min(45%, 260px);
+  height: 18px;
+}
+.rowDesc {
+  width: min(80%, 420px);
+  height: 13px;
+}
+
+/* Matches the nav's own breakpoint: links collapse into the hamburger. */
+@media (max-width: 520px) {
+  .navLinks {
+    display: none;
+  }
+  .menuButton {
+    display: block;
+  }
+  .thumb {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+/* The sweep reads as noise when motion is reduced; the shape alone is
+   enough to say "loading". */
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    background: var(--mist);
+    animation: none;
+  }
+}
