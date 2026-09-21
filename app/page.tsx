@@ -46,17 +46,20 @@ const experience: {
   {
     dates: "Aug '24 – May '25",
     org: "UC Berkeley",
-    role: "M.Eng, Mechanical Engineering",
+    role: "M.Eng Mechanical Engineering — Robotics & Autonomous Systems",
+    href: "/rosmaster",
   },
   {
     dates: "Aug '21 – Jun '24",
     org: "Apple Inc.",
     role: "Safety Test Automation Engineer",
+    href: "/fod-testing",
   },
   {
     dates: "Sep '18 – Jun '21",
     org: "UC San Diego",
     role: "B.S. Mechanical Engineering — Controls & Robotics",
+    href: "/trifinger",
   },
 ];
 
