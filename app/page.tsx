@@ -31,11 +31,17 @@ const work = [
   },
 ];
 
-const experience = [
+const experience: {
+  dates: string;
+  org: string;
+  role: string;
+  href?: string;
+}[] = [
   {
     dates: "Apr '26 – Present",
     org: "RoboForce",
-    role: "Robotics Data Collection Lead",
+    role: "Data Operations Shift Lead",
+    href: "/roboforce",
   },
   {
     dates: "Aug '24 – May '25",
@@ -202,7 +208,18 @@ export default function Home() {
               <li key={e.org} className={styles.expRow}>
                 <span className={`caption ${styles.expDates}`}>{e.dates}</span>
                 <span className={styles.expBody}>
-                  <span className={styles.expOrg}>{e.org}</span>
+                  <span className={styles.expOrg}>
+                    {e.href ? (
+                      <a href={e.href} className={styles.expOrgLink}>
+                        {e.org}
+                        <span aria-hidden="true" className={styles.expArrow}>
+                          →
+                        </span>
+                      </a>
+                    ) : (
+                      e.org
+                    )}
+                  </span>
                   <span className={styles.expRole}>{e.role}</span>
                 </span>
               </li>
@@ -248,7 +265,9 @@ export default function Home() {
           <h2 id="ct-h" className={`label ${styles.sectionLabel}`}>
             Contact
           </h2>
-          <p className={styles.contactLead}>Building something? Let's talk.</p>
+          <p className={styles.contactLead}>
+            Building something? Let&apos;s talk.
+          </p>
           <a
             className={styles.email}
             href="mailto:jonathangoenadibrata@gmail.com"

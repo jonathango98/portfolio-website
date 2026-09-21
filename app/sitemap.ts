@@ -17,6 +17,12 @@ const routes: {
     priority: 1.0,
   },
   {
+    path: "/roboforce",
+    lastModified: "2026-09-20T01:32:48-07:00", // app/roboforce/page.tsx
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
     path: "/life",
     lastModified: "2026-07-16T20:30:23-07:00", // app/life/page.tsx
     changeFrequency: "monthly",

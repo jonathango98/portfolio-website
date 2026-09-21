@@ -255,6 +255,26 @@
   font-size: 0.9375rem;
 }
 
+.expOrgLink {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+.expOrgLink:hover {
+  border-color: var(--ink);
+}
+
+.expArrow {
+  color: var(--signal);
+  font-size: 0.875rem;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.expOrgLink:hover .expArrow {
+  transform: translateX(3px);
+}
+
 /* ---------- also building (status manifest) ---------- */
 .miniRow {
   display: grid;

@@ -25,5 +25,6 @@ next-env.d.ts
 
 # local notes & docs
 feedback.md
+improvement.md
 context/
 public/images/IMAGES.md

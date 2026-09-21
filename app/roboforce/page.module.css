@@ -1,0 +1,663 @@
+/* ---------- page wrapper ---------- */
+.page {
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-bottom: var(--space-9);
+}
+
+/* ---------- back link ---------- */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: clamp(80px, 14vh, 120px);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+  transition: color var(--t-fast) var(--ease-out);
+}
+.back:hover {
+  color: var(--ink);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding-top: var(--space-8);
+  padding-bottom: clamp(64px, 10vw, 96px);
+}
+
+.heroEyebrow {
+  margin-bottom: var(--space-5);
+}
+
+.heroTitle {
+  font-size: clamp(2.75rem, 9vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--space-6);
+}
+
+.heroSub {
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  color: var(--slate);
+  line-height: 1.55;
+  max-width: 46ch;
+  margin-bottom: var(--space-4);
+}
+
+.heroBadge {
+  display: block;
+}
+
+/* ---------- hero stat strip ---------- */
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-5);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3px;
+  padding: var(--space-4) var(--space-5);
+  flex: 1;
+  min-width: 0;
+  border-right: 1px solid var(--hairline);
+}
+.heroStat:first-child {
+  padding-left: 0;
+}
+.heroStat:last-child {
+  border-right: none;
+}
+
+.heroStatPrimary .heroStatValue {
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+.heroStatPrimary .heroStatLabel {
+  color: var(--ink);
+}
+
+.heroStatValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.heroStatLabel {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ---------- hero meta ---------- */
+.heroMeta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin: 0;
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+.heroMetaItem {
+  min-width: 0;
+}
+
+.heroMetaLabel {
+  font-size: 0.6875rem;
+  margin-bottom: var(--space-2);
+}
+.heroMetaValue {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ---------- shared section frame ---------- */
+.section {
+  padding-block: clamp(48px, 8vw, 80px);
+  border-top: 1px solid var(--hairline);
+}
+
+.sectionLabel {
+  margin-bottom: var(--space-6);
+}
+
+.sectionIntro {
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.65;
+  max-width: 54ch;
+  margin-bottom: var(--space-7);
+  margin-top: 0;
+}
+
+/* ---------- quantity vs. quality ---------- */
+.tension {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 clamp(32px, 6vw, 64px);
+  align-items: start;
+}
+
+.tensionDivider {
+  background: var(--hairline);
+  width: 1px;
+  align-self: stretch;
+}
+
+.colLabel {
+  margin-bottom: var(--space-4);
+}
+
+.colIntro {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  margin-bottom: var(--space-4);
+  margin-top: 0;
+}
+.colIntro strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.colBody {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ---------- origin ---------- */
+.originLead {
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--signal);
+  max-width: 18ch;
+  margin: 0 0 var(--space-6);
+  padding-left: var(--space-5);
+  border-left: 2px solid var(--signal);
+}
+
+.originBody {
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 0;
+}
+.originBody + .originBody {
+  margin-top: var(--space-4);
+}
+.originBody em {
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* ---------- project pipeline strip (zoom-out) ----------
+   Our stage is filled, the rest are muted outlines: the geometry makes the
+   "everything downstream depends on this" point without asserting it. */
+.pipeline {
+  list-style: none;
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+
+.pipeCell {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--space-4) var(--space-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--slate);
+  text-align: center;
+}
+
+.pipeCell:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: calc(var(--space-2) / -2);
+  top: 50%;
+  transform: translate(50%, -50%);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--slate);
+  background: var(--paper);
+  padding-block: 2px;
+  z-index: 1;
+}
+
+.pipeCellOurs {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.pipeMine {
+  color: var(--paper);
+  opacity: 0.78;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.flowSubLabel {
+  margin-bottom: var(--space-5);
+}
+
+/* ---------- the collection loop ----------
+   Built in markup rather than as an image so it reflows to a vertical
+   stack on narrow screens and follows the theme's own colours. Stages I
+   own carry the signal rule; the owner line means no legend is needed. */
+.flowRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--hairline);
+}
+
+/* the arrow into the next stage */
+.stage:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: calc(var(--space-4) * -1 + 2px);
+  right: calc(var(--space-5) / -2);
+  transform: translate(50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  color: var(--slate);
+  background: var(--paper);
+  padding-inline: 3px;
+}
+
+.stageMine {
+  border-top-color: var(--signal);
+}
+
+.stageTag {
+  color: var(--slate);
+}
+.stageMine .stageTag {
+  color: var(--signal);
+}
+
+.stageTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.stageOwner {
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+.stageMine .stageOwner {
+  color: var(--signal);
+}
+
+.stageDetail {
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.55;
+  margin: var(--space-2) 0 0;
+}
+
+.flowReturn {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--hairline);
+}
+
+.flowReturnArrow {
+  color: var(--signal);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---------- systems built ---------- */
+.systems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6) var(--space-8);
+}
+
+.system {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.systemTech {
+  display: block;
+  color: var(--signal);
+  margin-bottom: var(--space-2);
+}
+
+.systemTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: var(--space-3);
+}
+
+.systemDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ---------- translation layer ---------- */
+.directions {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.direction {
+  padding-top: var(--space-5);
+  border-top: 2px solid var(--signal);
+}
+
+.directionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--ink);
+  margin-bottom: var(--space-3);
+}
+
+.directionArrow {
+  color: var(--signal);
+}
+
+.directionDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  max-width: 62ch;
+  margin: 0;
+}
+
+/* ---------- callout ---------- */
+.callout {
+  background: var(--mist);
+  border-radius: var(--r-md);
+  padding: clamp(28px, 6vw, 56px);
+  margin-block: clamp(48px, 8vw, 80px);
+}
+
+.calloutText {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 48ch;
+  margin: 0;
+}
+
+/* ---------- skim layer: the bold takeaway under each block title ----------
+   A hiring manager reading only the headings and these lines should get the
+   whole argument; .capDesc / .systemDesc / .directionDesc are second pass. */
+.lead {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 var(--space-3);
+  max-width: 44ch;
+}
+
+/* ---------- capabilities ---------- */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-7) var(--space-8);
+}
+
+.capability {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.capability .lead {
+  margin-bottom: 0;
+  margin-top: var(--space-1);
+}
+
+.capTag {
+  color: var(--signal);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.capTech {
+  color: var(--slate);
+  margin-left: var(--space-2);
+}
+.capTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 0;
+}
+.capDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ---------- stack ---------- */
+.stackRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+}
+
+.stackBadge {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  padding: var(--space-1) var(--space-3);
+  background: var(--mist);
+}
+
+/* ---------- KPI note, folded into the translation section ---------- */
+.loopNote {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.65;
+  max-width: 62ch;
+  margin: var(--space-7) 0 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+/* ---------- closing statement (peak-end) ---------- */
+.closing {
+  padding-block: clamp(56px, 9vw, 96px);
+  border-top: 1px solid var(--hairline);
+}
+
+.closingText {
+  font-size: clamp(1.375rem, 3.2vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 26ch;
+  margin: 0;
+}
+
+/* ---------- contact ---------- */
+.ctaLead {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-5);
+  margin-top: 0;
+}
+
+.ctaEmail {
+  display: inline-block;
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  color: var(--signal);
+  border-bottom: 1px solid transparent;
+  margin-bottom: var(--space-7);
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+.ctaEmail:hover {
+  border-color: var(--signal);
+}
+
+.ctaSocials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.ctaSocial {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  transition: color var(--t-fast) var(--ease-out);
+}
+.ctaSocial:hover {
+  color: var(--ink);
+}
+
+/* ---------- footer ---------- */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: clamp(48px, 8vw, 80px);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 880px) {
+  .heroMeta {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-6);
+  }
+}
+
+@media (max-width: 680px) {
+  .heroStat {
+    flex: 0 0 50%;
+  }
+  .heroStat:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+  .heroStat:nth-child(2n) {
+    border-right: none;
+  }
+  .heroStat:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .tension {
+    grid-template-columns: 1fr;
+  }
+
+  .tensionDivider {
+    display: none;
+  }
+
+  .tensionCol + .tensionCol {
+    margin-top: var(--space-7);
+  }
+
+  .pipeCell {
+    flex: 0 0 calc(50% - var(--space-2));
+  }
+  .pipeCell:not(:last-child)::after {
+    content: "→";
+  }
+  .pipeCell:nth-child(2)::after {
+    content: "↓";
+    right: 50%;
+    top: auto;
+    bottom: calc(var(--space-2) / -2);
+    transform: translate(50%, 50%);
+  }
+
+  .flowRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .stage:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    bottom: calc(var(--space-6) / -2);
+    right: auto;
+    left: 0;
+    transform: translateY(50%);
+  }
+
+  .capabilities,
+  .systems {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
