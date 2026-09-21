@@ -39,7 +39,7 @@ const experience: {
 }[] = [
   {
     dates: "Apr '26 – Present",
-    org: "RoboForce",
+    org: "RoboForce Inc.",
     role: "Data Operations Shift Lead",
     href: "/roboforce",
   },

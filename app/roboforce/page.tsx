@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
 
 const description =
-  "Robot-learning data collection at RoboForce: 1,000+ demonstration episodes a day across 10+ stations and 20+ operators — the rigs, the task design, and the translation layer between AI engineers and the floor.";
+  "Robot-learning data collection at RoboForce Inc.: 1,000+ demonstration episodes a day across 10+ stations and 20+ operators — the rigs, the task design, and the translation layer between AI engineers and the floor.";
 
 export const metadata: Metadata = {
   title: "Teleoperation at Scale",
@@ -54,7 +54,7 @@ const jsonLd = {
     },
     {
       "@type": "CreativeWork",
-      name: "Teleoperation at Scale — Robot Learning Data at RoboForce",
+      name: "Teleoperation at Scale — Robot Learning Data at RoboForce Inc.",
       description,
       url: pageUrl,
       author: { "@id": `${SITE_URL}/#person` },
@@ -200,7 +200,7 @@ export default function RoboforcePage() {
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <header className={styles.hero}>
           <p className={`label ${styles.heroEyebrow}`}>
-            RoboForce · Robot Learning Data
+            RoboForce Inc. · Robot Learning Data
           </p>
           <h1 className={styles.heroTitle}>
             Teleoperation<br />at Scale

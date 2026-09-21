@@ -85,7 +85,7 @@ const SILHOUETTES: Record<string, Silhouette> = {
   "/roboforce": {
     hero: "case",
     navLinks: WORK_NAV,
-    eyebrow: 252, // RoboForce · Robot Learning Data
+    eyebrow: 293, // RoboForce Inc. · Robot Learning Data
     title: ["65%", "39%"], // Teleoperation / at Scale
     sub: ["80%", "37%"],
     stats: {
