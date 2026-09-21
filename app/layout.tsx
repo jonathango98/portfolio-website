@@ -62,6 +62,35 @@ const personJsonLd = {
   description: SITE_DESCRIPTION,
   url: SITE_URL,
   image: `${SITE_URL}/images/headshot.jpg`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Jose",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  seeks: {
+    "@type": "Demand",
+    name: "Robotics and test automation roles in the South Bay",
+  },
+  email: "jonathangoenadibrata@gmail.com",
+  knowsLanguage: ["en", "id"],
+  worksFor: {
+    "@type": "Organization",
+    name: "RoboForce Inc.",
+  },
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Robotics Engineer",
+    // O*NET-SOC code for Robotics Engineers — lets knowledge graphs slot the
+    // profile into a known occupation rather than guessing from prose.
+    occupationalCategory: "17-2199.08",
+    occupationLocation: {
+      "@type": "AdministrativeArea",
+      name: "South Bay, California",
+    },
+    skills:
+      "Robot integration, test automation, motion planning, PLC controls, teleoperation and robot-learning data collection",
+  },
   alumniOf: [
     {
       "@type": "CollegeOrUniversity",
@@ -78,13 +107,31 @@ const personJsonLd = {
     "SLAM",
     "Motion Planning",
     "Path Planning",
+    "MoveIt 2",
     "Computer Vision",
     "Sensor Fusion",
     "Controls Engineering",
-    "Automation",
+    "Test Automation",
+    "Robotic Process Automation",
+    "Industrial Automation",
+    "PLC Programming",
     "CODESYS",
+    "Structured Text (IEC 61131-3)",
+    "Teleoperation",
+    "Robot Learning",
+    "Imitation Learning",
+    "Vision-Language-Action (VLA) Models",
+    "Reinforcement Learning",
+    "Universal Robots UR5e",
+    "Dexterous Manipulation",
+    "Webots",
     "Python",
     "C++",
+    "PyTorch",
+    "Linux",
+    "SolidWorks",
+    "Siemens NX",
+    "CAD",
   ],
   sameAs: [
     "https://www.linkedin.com/in/jonathangoenadibrata/",
@@ -95,10 +142,16 @@ const personJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
   name: "Jonathan Goenadibrata",
+  alternateName: "jonathango.xyz",
+  description: SITE_DESCRIPTION,
   url: SITE_URL,
+  inLanguage: "en-US",
   publisher: { "@id": PERSON_ID },
+  author: { "@id": PERSON_ID },
   about: { "@id": PERSON_ID },
+  copyrightHolder: { "@id": PERSON_ID },
 };
 
 export default function RootLayout({

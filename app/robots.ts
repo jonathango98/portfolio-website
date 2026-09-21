@@ -8,20 +8,39 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
       },
-      // Explicit allow rules for major AI crawlers, so intent is unambiguous.
+      // Explicit allow rules for search and AI crawlers, so intent is
+      // unambiguous: this site wants to be indexed, quoted, and cited.
       {
         userAgent: [
+          // Search indexes
+          "Googlebot",
+          "Bingbot",
+          "DuckDuckBot",
+          "Applebot",
+          // Answer engines / assistants
           "GPTBot",
           "OAI-SearchBot",
           "ChatGPT-User",
           "ClaudeBot",
           "Claude-Web",
+          "Claude-User",
+          "Claude-SearchBot",
           "anthropic-ai",
           "PerplexityBot",
+          "Perplexity-User",
+          "DuckAssistBot",
+          "MistralAI-User",
+          "Amazonbot",
+          "YouBot",
+          "cohere-ai",
+          // Model / dataset training crawlers
           "Google-Extended",
           "Applebot-Extended",
-          "cohere-ai",
+          "Google-CloudVertexBot",
+          "meta-externalagent",
           "CCBot",
+          "Diffbot",
+          "Timpibot",
         ],
         allow: "/",
       },

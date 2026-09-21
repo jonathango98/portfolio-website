@@ -1,6 +1,6 @@
 # Jonathan Goenadibrata
 
-> Robotics engineer building practical robots that make everyday life easier. Background: UC Berkeley M.Eng in Mechanical Engineering (2024–25), Safety Test Automation Engineer at Apple Inc. (2021–24), B.S. Mechanical Engineering (Controls & Robotics) at UC San Diego (2018–21). Works across ROS 2, SLAM, motion planning, computer vision, sensor fusion, controls, and industrial automation.
+> Robotics engineer building practical robots that make everyday life easier. Background: UC Berkeley M.Eng in Mechanical Engineering (2024–25), Safety Test Automation Engineer at Apple Inc. (2021–24), B.S. Mechanical Engineering (Controls & Robotics) at UC San Diego (2018–21). Works across ROS 2, SLAM, motion planning, computer vision, sensor fusion, controls, and industrial automation. Based in San Jose, CA; open to robotics and test automation roles in the South Bay.
 
 ## Pages
 
@@ -10,6 +10,23 @@
 - [Autonomous SAR Rover](https://jonathango.xyz/rosmaster): UC Berkeley M.Eng capstone — an autonomous ROS 2 rover (Yahboom RDK X3) that uses SLAM and frontier exploration to map disaster interiors, detect survivors, and deliver first aid via an electromagnetic arm.
 - [Foreign Object Detection Testing](https://jonathango.xyz/fod-testing): Robotic process automation built at Apple Inc. for wireless-charging safety testing — 2,700 tests per product run unattended, cutting manual labor 96%.
 - [TriFinger Manipulation](https://jonathango.xyz/trifinger): UC San Diego senior capstone — a low-cost, 9-DOF three-fingered robotic manipulator built in-house as a dexterous manipulation platform for robotics and RL research.
+
+## Availability
+
+Open to robotics and test automation roles in the South Bay (San Jose, CA). Currently Data Operations Shift Lead at RoboForce Inc. Interested in robot integration, test automation, and controls.
+
+## Stack
+
+- Robotics: ROS 2, SLAM (Cartographer), Nav2, A* path planning, MoveIt 2, frontier exploration, AprilTag detection, sensor fusion, Webots
+- Controls & automation: CODESYS, Structured Text (IEC 61131-3), PLC programming, state-machine design, robotic process automation, safety-test automation
+- Robot learning: teleoperation (GELLO, UMI, Vive Trackers, VR), demonstration data collection for Vision-Language-Action (VLA) models, imitation learning, reinforcement learning, PyTorch
+- Platforms: RoboForce Titan, Universal Robots UR5e, Yahboom RDK X3, Hyulim DTR-MU
+- Software: Python, C++, Linux, OpenCV, Git
+- Mechanical: SolidWorks, Siemens NX, CAD, design for manufacturing, hardware prototyping
+
+## Resume
+
+- [Resume (PDF)](https://jonathango.xyz/resumes/Tech%20Resume%20-%20Jonathan%20Goenadibrata.pdf): Full work history, education, and skills.
 
 ## Contact
 

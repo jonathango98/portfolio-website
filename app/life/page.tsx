@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 import PhotoGallery from "@/components/PhotoGallery";
 import DesignCarousel from "@/components/DesignCarousel";
 import styles from "./page.module.css";
+import { SITE_URL } from "@/app/site";
 
 const lifeDescription =
   "The other side of the toggle — design, photography, guitar, and time with friends talking life and faith.";
@@ -38,6 +39,35 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#10141d",
+};
+
+const pageUrl = `${SITE_URL}/life`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Life", item: pageUrl },
+      ],
+    },
+    {
+      "@type": "AboutPage",
+      "@id": `${pageUrl}#page`,
+      url: pageUrl,
+      name: "Life — Jonathan Goenadibrata",
+      description: lifeDescription,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
+      about: { "@id": `${SITE_URL}/#person` },
+      mainEntity: { "@id": `${SITE_URL}/#person` },
+      primaryImageOfPage: `${SITE_URL}${heroImage.url}`,
+      keywords:
+        "graphic design, photography, guitar, faith, personal interests",
+    },
+  ],
 };
 
 const PHOTOS_DIR = path.join(process.cwd(), "public/images/photography");
@@ -115,6 +145,10 @@ export default async function Life() {
 
   return (
     <div data-mode="life" className={styles.lifeRoot}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav mode="life" links={lifeLinks} />
       <main id="main" className={styles.page}>
         <header className={styles.hero}>

@@ -55,10 +55,21 @@ const jsonLd = {
     {
       "@type": "CreativeWork",
       name: "Autonomous SAR Rover",
+      datePublished: "2025-05-01",
+      temporalCoverage: "2024-08/2025-05",
+      keywords:
+        "ROS 2, SLAM, frontier exploration, A* path planning, AprilTag detection, autonomous navigation, search and rescue robotics, Yahboom RDK X3",
+      about: [
+        { "@type": "Thing", name: "Search and rescue robotics" },
+        { "@type": "Thing", name: "Simultaneous localization and mapping" },
+      ],
       description,
       url: pageUrl,
       image: `${SITE_URL}${heroImage.url}`,
       author: { "@id": `${SITE_URL}/#person` },
+      creator: { "@id": `${SITE_URL}/#person` },
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
     },
   ],
 };

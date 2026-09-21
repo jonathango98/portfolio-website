@@ -55,10 +55,21 @@ const jsonLd = {
     {
       "@type": "CreativeWork",
       name: "Foreign Object Detection",
+      datePublished: "2024-06-01",
+      temporalCoverage: "2021-08/2024-06",
+      keywords:
+        "robotic process automation, safety test automation, wireless charging foreign object detection, test fixture design, end-effector design, Python automation",
+      about: [
+        { "@type": "Thing", name: "Robotic test automation" },
+        { "@type": "Thing", name: "Product safety certification testing" },
+      ],
       description,
       url: pageUrl,
       image: `${SITE_URL}${heroImage.url}`,
       author: { "@id": `${SITE_URL}/#person` },
+      creator: { "@id": `${SITE_URL}/#person` },
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
     },
   ],
 };

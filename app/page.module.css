@@ -40,8 +40,11 @@
 .tagline {
   animation-delay: 160ms;
 }
+.availability {
+  animation-delay: 220ms;
+}
 .heroActions {
-  animation-delay: 240ms;
+  animation-delay: 300ms;
 }
 
 .portrait {
@@ -82,7 +85,22 @@
   line-height: 1.45;
   color: var(--slate);
   max-width: 30ch;
+  margin-bottom: var(--space-4);
+}
+
+.availability {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  max-width: 62ch;
   margin-bottom: var(--space-6);
+}
+.availabilityDot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
 }
 
 .heroActions {

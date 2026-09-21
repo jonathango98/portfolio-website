@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Nav from "@/components/Nav";
 import styles from "./page.module.css";
+import { SITE_URL } from "./site";
 
 const RESUME = "/resumes/Tech Resume - Jonathan Goenadibrata.pdf";
 
@@ -93,9 +94,45 @@ const socials = [
   { label: "Instagram", href: "https://www.instagram.com/jonathango98/" },
 ];
 
+// ProfilePage is the type search engines and AI crawlers look for on a
+// personal site: it marks the page as *about* a person rather than a generic
+// document, and hangs the work off that same entity.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}/#profilepage`,
+      url: SITE_URL,
+      name: "Jonathan Goenadibrata — Robotics Engineer",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
+      mainEntity: { "@id": `${SITE_URL}/#person` },
+      about: { "@id": `${SITE_URL}/#person` },
+    },
+    {
+      "@type": "ItemList",
+      name: "Robotics projects",
+      itemListOrder: "https://schema.org/ItemListUnordered",
+      numberOfItems: work.length,
+      itemListElement: work.map((w, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}${w.href}`,
+        name: w.title,
+        description: w.desc,
+      })),
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav />
       <main id="main" className={styles.page}>
         <header className={styles.hero}>
@@ -116,6 +153,10 @@ export default function Home() {
           </h1>
           <p className={styles.tagline}>
             I build practical robots that make everyday life easier.
+          </p>
+          <p className={`caption ${styles.availability}`}>
+            <span className={styles.availabilityDot} aria-hidden="true" />
+            Open to robotics &amp; test automation roles in the South Bay.
           </p>
           <div className={styles.heroActions}>
             <a className={styles.resume} href={RESUME} download>

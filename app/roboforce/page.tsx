@@ -55,9 +55,19 @@ const jsonLd = {
     {
       "@type": "CreativeWork",
       name: "Teleoperation at Scale — Robot Learning Data at RoboForce Inc.",
+      datePublished: "2026-04-01",
+      keywords:
+        "teleoperation, robot learning, demonstration data collection, Vision-Language-Action models, VLA training data, GELLO, UMI, Universal Robots UR5e, RoboForce Titan, data operations",
+      about: [
+        { "@type": "Thing", name: "Robot learning data collection" },
+        { "@type": "Thing", name: "Vision-Language-Action models" },
+      ],
       description,
       url: pageUrl,
       author: { "@id": `${SITE_URL}/#person` },
+      creator: { "@id": `${SITE_URL}/#person` },
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
     },
   ],
 };

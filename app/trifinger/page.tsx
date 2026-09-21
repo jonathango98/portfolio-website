@@ -58,10 +58,18 @@ const jsonLd = {
     {
       "@type": "CreativeWork",
       name: "TriFinger Manipulation",
+      datePublished: "2021-03-01",
+      temporalCoverage: "2021-01/2021-03",
+      keywords:
+        "dexterous manipulation, 9-DOF manipulator, robot learning platform, reinforcement learning hardware, low-cost robotics",
+      about: [{ "@type": "Thing", name: "Dexterous robotic manipulation" }],
       description,
       url: pageUrl,
       image: `${SITE_URL}${heroImage.url}`,
       author: { "@id": `${SITE_URL}/#person` },
+      creator: { "@id": `${SITE_URL}/#person` },
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en-US",
     },
   ],
 };
