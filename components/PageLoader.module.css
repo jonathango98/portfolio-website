@@ -29,60 +29,6 @@
   transform: translateY(-8px);
 }
 
-/* ---------- header ---------- */
-.header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-bottom: 1px solid var(--hairline);
-}
-
-.headerInner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 880px;
-  margin-inline: auto;
-  padding: 16px var(--gutter);
-}
-
-.monogram {
-  width: 24px;
-  height: 14px;
-}
-
-.navLinks {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-}
-.navLink {
-  height: 11px;
-}
-.navLink:nth-child(1) {
-  width: 52px;
-}
-.navLink:nth-child(2) {
-  width: 78px;
-}
-.navLink:nth-child(3) {
-  width: 56px;
-}
-
-.toggle {
-  width: 104px;
-  height: 24px;
-  border-radius: 999px;
-}
-
-.menuButton {
-  display: none;
-  width: 16px;
-  height: 12px;
-  border-radius: 2px;
-}
-
 /* ---------- the shimmering placeholder ---------- */
 @keyframes sweep {
   from {
@@ -106,13 +52,96 @@
   animation: sweep 2.8s linear infinite;
 }
 
-/* ---------- hero silhouette ---------- */
+/* ---------- text ----------
+   A bar is only as tall as the glyphs; the line box around it is taller.
+   Each run declares the font size and line height it stands in for, and
+   the leading becomes margin, so a stack of bars occupies exactly the
+   space the real copy will. Flex, so those margins never collapse. */
+.text {
+  --fs: 1rem;
+  --lh: 1.6;
+  --bar: 0.72; /* glyph height as a share of the font size */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.line {
+  height: calc(var(--fs) * var(--bar));
+  margin-block: calc(var(--fs) * (var(--lh) - var(--bar)) / 2);
+}
+
+/* ---------- header ---------- */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 880px;
+  margin-inline: auto;
+  padding: 16px var(--gutter);
+}
+
+.monogram {
+  width: 24px;
+  height: 12px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+.navLink {
+  height: 9px;
+}
+
+.toggle {
+  width: 104px;
+  height: 27px;
+  border-radius: 999px;
+}
+
+.menuButton {
+  display: none;
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* ---------- the column every page is built in ----------
+   Block, not flex: the pages collapse sibling margins and the skeleton
+   has to land on the same spacing. Only .text is a flex container, so
+   its line margins survive. */
 .frame {
   width: 100%;
   max-width: 880px;
   margin-inline: auto;
   padding-inline: var(--gutter);
+}
+/* /rosmaster runs wider than the rest. */
+.frameWide {
+  max-width: 920px;
+}
+
+.sectionLabel {
+  --fs: 0.75rem;
+  --lh: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+/* ---------- identity hero (/ and /life) ---------- */
+.identityHero {
   padding-top: clamp(120px, 22vh, 200px);
+  padding-bottom: clamp(72px, 12vw, 128px);
 }
 
 .portrait {
@@ -123,28 +152,24 @@
 }
 
 .eyebrow {
-  width: 140px;
-  height: 12px;
+  --fs: 0.75rem;
+  --lh: 1.6;
   margin-bottom: var(--space-4);
 }
 
-.nameLine,
-.nameLineShort {
-  height: clamp(2.5rem, 10vw, 5.5rem);
-  margin-bottom: var(--space-2);
-  border-radius: var(--r-md);
-}
-.nameLine {
-  width: min(58%, 420px);
-}
-.nameLineShort {
-  width: min(74%, 540px);
+/* "Jonathan" over "Goenadibrata" — the short line leads. */
+.name {
+  --fs: clamp(2.5rem, 10vw, 5.5rem);
+  --lh: 1;
   margin-bottom: var(--space-5);
+}
+.name .line {
+  border-radius: var(--r-md);
 }
 
 .tagline {
-  width: min(70%, 380px);
-  height: 20px;
+  --fs: clamp(1.125rem, 2.4vw, 1.5rem);
+  --lh: 1.45;
   margin-bottom: var(--space-6);
 }
 
@@ -152,47 +177,225 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-5);
-  margin-bottom: clamp(72px, 12vw, 128px);
 }
 .pill {
-  width: 80px;
-  height: 14px;
+  height: 11px;
+  margin-block: 6px;
 }
 
-/* ---------- work rows ---------- */
+/* ---------- sections under an identity hero ---------- */
+.section {
+  padding-block: clamp(48px, 8vw, 80px);
+  border-top: 1px solid var(--hairline);
+}
+
+.greeting {
+  --fs: clamp(1.25rem, 3vw, 1.75rem);
+  --lh: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.body {
+  --fs: 1.0625rem;
+  --lh: 1.7;
+}
+.body + .body {
+  margin-top: var(--space-4);
+}
+
+/* work rows (/) */
 .rows {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
 }
 
 .row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+}
+.row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .thumb {
   flex: none;
   width: 96px;
   height: 96px;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
 }
 
 .rowText {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  min-width: 0;
 }
 .rowTitle {
-  width: min(45%, 260px);
-  height: 18px;
+  --fs: clamp(1.375rem, 3vw, 1.75rem);
+  --lh: 1.15;
+}
+.rowHw {
+  --fs: 0.8125rem;
+  --lh: 1.6;
+  margin-top: var(--space-2);
 }
 .rowDesc {
-  width: min(80%, 420px);
-  height: 13px;
+  --fs: 1rem;
+  --lh: 1.6;
+  margin-top: var(--space-1);
 }
+
+/* photography (/life) */
+.gear {
+  --fs: 0.8125rem;
+  --lh: 1.6;
+  margin-bottom: var(--space-5);
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+
+/* ---------- write-up hero (the /roboforce family) ---------- */
+.back {
+  --fs: 0.8125rem;
+  --lh: 1.6;
+  margin-top: clamp(80px, 14vh, 120px);
+}
+
+.caseHero {
+  padding-top: var(--space-8);
+  padding-bottom: clamp(64px, 10vw, 96px);
+}
+
+.caseHero .eyebrow {
+  margin-bottom: var(--space-5);
+}
+
+/* Two-line headline: the long line leads, the short one lands. */
+.title {
+  --fs: clamp(2.75rem, 9vw, 5rem);
+  --lh: 1;
+  margin-bottom: var(--space-6);
+}
+.title .line {
+  border-radius: var(--r-md);
+}
+
+.sub {
+  --fs: clamp(1.0625rem, 2vw, 1.25rem);
+  --lh: 1.55;
+  margin-bottom: var(--space-4);
+}
+
+/* four-up stat strip */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-5);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-4) var(--space-5);
+  border-right: 1px solid var(--hairline);
+}
+.stat:last-child {
+  border-right: none;
+}
+
+/* RoboForce's strip: flush with the column, numbers sitting on one
+   baseline because the headline one is set larger. */
+.statsLead .stat {
+  justify-content: flex-end;
+}
+.statsLead .stat:first-child {
+  padding-left: 0;
+}
+
+.statValue {
+  --fs: clamp(1.125rem, 2.5vw, 1.5rem);
+  --lh: 1;
+  margin-bottom: 3px;
+}
+/* The headline number runs larger than the three beside it. */
+.statValueLead {
+  --fs: clamp(1.75rem, 4.5vw, 2.5rem);
+}
+.statLabel {
+  --fs: 0.6875rem;
+  --lh: 1.6;
+}
+
+.badge {
+  --fs: 0.8125rem;
+  --lh: 1.6;
+}
+
+/* four-column meta grid */
+.meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+.metaItem {
+  min-width: 0;
+}
+.metaLabel {
+  --fs: 0.6875rem;
+  --lh: 1.6;
+  margin-bottom: var(--space-2);
+}
+.metaValue {
+  --fs: 0.875rem;
+  --lh: 1.5;
+}
+
+.caseSection {
+  padding-top: clamp(48px, 8vw, 80px);
+  border-top: 1px solid var(--hairline);
+}
+.intro {
+  --fs: 1rem;
+  --lh: 1.65;
+}
+
+/* ---------- headline beside a product shot (/rosmaster) ---------- */
+.featureLayout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.featureText {
+  min-width: 0;
+}
+
+.featureImage {
+  width: clamp(180px, 28vw, 300px);
+  height: clamp(180px, 28vw, 300px);
+  border-radius: var(--r-lg);
+}
+
+/* ---------- responsive ---------- */
 
 /* Matches the nav's own breakpoint: links collapse into the hamburger. */
 @media (max-width: 520px) {
@@ -205,6 +408,38 @@
   .thumb {
     width: 72px;
     height: 72px;
+  }
+}
+
+/* The meta grid halves before the stat strip does. */
+@media (max-width: 880px) {
+  .meta {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-6);
+  }
+}
+
+@media (max-width: 720px) {
+  .featureLayout {
+    grid-template-columns: 1fr;
+  }
+  .featureImage {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .stat {
+    flex: 0 0 50%;
+  }
+  .statsLead .stat:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+  .stat:nth-child(2n) {
+    border-right: none;
+  }
+  .stat:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline);
   }
 }
 
