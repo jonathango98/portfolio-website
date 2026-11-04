@@ -10,6 +10,8 @@
 - [Autonomous SAR Rover](https://jonathango.xyz/rosmaster): UC Berkeley M.Eng capstone — an autonomous ROS 2 rover (Yahboom RDK X3) that uses SLAM and frontier exploration to map disaster interiors, detect survivors, and deliver first aid via an electromagnetic arm.
 - [Foreign Object Detection Testing](https://jonathango.xyz/fod-testing): Robotic process automation built at Apple Inc. for wireless-charging safety testing — 2,700 tests per product run unattended, cutting manual labor 96%.
 - [TriFinger Manipulation](https://jonathango.xyz/trifinger): UC San Diego senior capstone — a low-cost, 9-DOF three-fingered robotic manipulator built in-house as a dexterous manipulation platform for robotics and RL research.
+- [Side Quest](https://jonathango.xyz/sidequest): In development — an optional phone-browser game for NextGen Conference 2027 (200–300 youth leaders) that rewards meeting people from other churches; join by one QR scan, no install. FastAPI + Jinja on Railway, single idempotent points service with an append-only audit log, usher console, big-screen view, rotating personal QR codes, post-event data deletion, load-tested with 300 simultaneous joins. Open source.
+- [Photobooth](https://jonathango.xyz/photobooth): Live side project — a browser-based iPad photobooth kiosk; guests trigger by tap, MediaPipe hand gesture, or Bluetooth remote, pick a collage template, and scan a QR to download on their phone. Offline-first (IndexedDB upload queue, service worker), multi-event Node.js/Express + MongoDB + S3 backend on Railway, vanilla JS PWA on Netlify.
 
 ## Availability
 

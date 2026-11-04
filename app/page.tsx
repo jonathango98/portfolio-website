@@ -66,6 +66,13 @@ const experience: {
 
 const projects = [
   {
+    title: "Side Quest",
+    emoji: "🧭",
+    type: "wip",
+    desc: "Phone game that gets youth leaders meeting other churches.",
+    href: "/sidequest",
+  },
+  {
     title: "The List",
     emoji: "🍜",
     type: "live",
@@ -76,8 +83,8 @@ const projects = [
     title: "Photobooth",
     emoji: "📸",
     type: "live",
-    desc: "Capture, template, and generate QR codes.",
-    href: "https://photobooth.jonathango.xyz",
+    desc: "iPad booth that hands guests their collage by QR.",
+    href: "/photobooth",
   },
   {
     title: "Snake AI",
@@ -276,32 +283,35 @@ export default function Home() {
             Also building
           </h2>
           <ul className={styles.miniList}>
-            {projects.map((p) => (
-              <li key={p.title}>
-                <a
-                  className={styles.miniRow}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className={styles.miniEmoji} aria-hidden="true">
-                    {p.emoji}
-                  </span>
-                  <span className={styles.miniTitle}>{p.title}</span>
-                  <span
-                    className={`caption ${styles.miniStatus} ${
-                      p.type === "live" ? styles.isLive : ""
-                    }`}
+            {projects.map((p) => {
+              const external = p.href.startsWith("http");
+              return (
+                <li key={p.title}>
+                  <a
+                    className={styles.miniRow}
+                    href={p.href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
                   >
-                    {p.type}
-                  </span>
-                  <span className={styles.miniDesc}>{p.desc}</span>
-                  <span className={styles.miniArrow} aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              </li>
-            ))}
+                    <span className={styles.miniEmoji} aria-hidden="true">
+                      {p.emoji}
+                    </span>
+                    <span className={styles.miniTitle}>{p.title}</span>
+                    <span
+                      className={`caption ${styles.miniStatus} ${
+                        p.type === "live" ? styles.isLive : ""
+                      }`}
+                    >
+                      {p.type}
+                    </span>
+                    <span className={styles.miniDesc}>{p.desc}</span>
+                    <span className={styles.miniArrow} aria-hidden="true">
+                      {external ? "↗" : "→"}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </section>
 
