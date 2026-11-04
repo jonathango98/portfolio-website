@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
+import type { ComponentType } from "react";
 import Nav from "@/components/Nav";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
+import {
+  BoothPopup,
+  Flow,
+  PickScreen,
+  ScanScreen,
+  TapScreen,
+  icons,
+  type FlowStep,
+} from "./visuals";
 
 const LIVE_URL = "https://photobooth.jonathango.xyz";
 const REPO_URL = "https://github.com/jonathango98/photobooth";
 
 const description =
-  "A browser-based event photobooth for iPad. Guests take photos, pick a collage template, and scan a QR code to download it on their phone, even when the venue Wi-Fi drops.";
+  "A photobooth built to be simple: an iPad, a web page, and a QR code. Guests tap, pick a frame, and scan to get their photos. No app, no sign-up, and a new event takes minutes.";
 
 const heroImage = {
   url: "/images/headshot.jpg",
@@ -55,7 +66,7 @@ const jsonLd = {
       applicationCategory: "MultimediaApplication",
       operatingSystem: "Web browser (iPad kiosk)",
       keywords:
-        "event photobooth, kiosk PWA, QR code download, MediaPipe gesture trigger, offline-first, Node.js, MongoDB, S3",
+        "simple event photobooth, iPad kiosk, QR code download, no app, offline-first, vanilla JavaScript, Node.js, MongoDB, S3",
       description,
       url: pageUrl,
       sameAs: LIVE_URL,
@@ -68,39 +79,97 @@ const jsonLd = {
   ],
 };
 
-const flow: { title: string; desc: string }[] = [
+type Item = { title: string; desc: string };
+
+const use: (Item & { Visual: ComponentType })[] = [
   {
-    title: "Strike a Pose",
-    desc: "Tap the screen, hold up a peace sign, or click a Bluetooth remote. A countdown runs, then the shots.",
+    title: "Tap",
+    desc: "The whole screen is the button. A peace sign or a Bluetooth remote works too.",
+    Visual: TapScreen,
   },
   {
-    title: "Pick a Frame",
-    desc: "Every template previews live with the guest's own photos already in it.",
+    title: "Pick",
+    desc: "Every frame previews with the guest's own photos in it. One frame? This step is skipped.",
+    Visual: PickScreen,
   },
   {
-    title: "Scan to Keep",
-    desc: "A QR code on screen opens the collage on the guest's phone, ready to save.",
+    title: "Scan",
+    desc: "A QR code opens the collage on the guest's phone. Save it and go.",
+    Visual: ScanScreen,
   },
 ];
 
-const system: { title: string; desc: string }[] = [
+const instructions: string[] = [
+  "Tap the screen or show a peace sign ✌️ to start.",
+  "After 3 shots, choose a template.",
+  "Scan the QR code to download your picture!",
+];
+
+const delivery: FlowStep[] = [
+  { icon: icons.camera, title: "Shots taken", sub: "on the iPad" },
+  { icon: icons.qr, title: "QR on screen", sub: "right away" },
+  { icon: icons.phone, title: "Guest scans", sub: "with the phone camera" },
+  { icon: icons.image, title: "Photo appears", sub: "ready to save" },
+];
+
+const architecture: FlowStep[] = [
+  { icon: icons.tablet, title: "iPad", sub: "the booth web page" },
   {
-    title: "Kiosk in a Browser",
-    desc: "Plain HTML, CSS, and JS on Netlify, installed on the iPad as a full-screen web app. Collages are composited on a canvas right on the device.",
+    icon: icons.server,
+    title: "One server",
+    chips: ["Database", "Photos"],
+    arrow: "back",
+  },
+  { icon: icons.phone, title: "Guest phone", sub: "the download page" },
+];
+
+const setup: Item[] = [
+  {
+    title: "Duplicate an Event",
+    desc: "Copy the last event in the admin panel. Change the name and shot count.",
   },
   {
-    title: "Hands-Free Trigger",
-    desc: "MediaPipe hand tracking reads peace, palm, and thumbs-up gestures, with a hold-to-confirm ring so a passing wave doesn't fire the shutter.",
+    title: "Drop In a Frame",
+    desc: "Design it in Canva on a starter file. A script finds the photo windows, so nothing is placed by hand.",
   },
   {
-    title: "Offline-First Upload",
-    desc: "The QR appears before the upload finishes. If the Wi-Fi drops, the photos wait in on-device storage and retry every minute, and the guest's link fills in once they land.",
-  },
-  {
-    title: "One Server, Many Events",
-    desc: "Node.js, MongoDB, and an S3 bucket on Railway. Each event has its own templates, shot count, and gestures, with an organizer panel for ZIP downloads and a projector slideshow.",
+    title: "Open the Link",
+    desc: "Open the booth link on the iPad. The organizer gets their own link to download every photo as a ZIP.",
   },
 ];
+
+const system: Item[] = [
+  {
+    title: "Plain Web Page",
+    desc: "HTML, CSS, and JavaScript. No framework, no build step. Collages are drawn right on the iPad.",
+  },
+  {
+    title: "One Server",
+    desc: "One Node.js server, one database, and one photo bucket run every event.",
+  },
+  {
+    title: "Settings, Not Code",
+    desc: "Frames, shots, countdown, and gestures are event settings. A new event never needs a code change.",
+  },
+];
+
+function Steps({ items, numbered }: { items: Item[]; numbered?: boolean }) {
+  return (
+    <ol className={styles.sysList}>
+      {items.map((s, i) => (
+        <li key={s.title} className={styles.sysItem}>
+          {numbered && (
+            <span className={`caption ${styles.sysNum}`}>0{i + 1}</span>
+          )}
+          <div className={styles.sysBody}>
+            <h3 className={styles.sysTitle}>{s.title}</h3>
+            <p className={styles.sysDesc}>{s.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 export default function PhotoboothPage() {
   return (
@@ -122,25 +191,25 @@ export default function PhotoboothPage() {
           </p>
           <h1 className={styles.heroTitle}>Photobooth</h1>
           <p className={styles.heroSub}>
-            An event photobooth that runs on an iPad browser and hands every
-            guest their collage with one QR scan.
+            A photobooth built to be simple. An iPad, a web page, and a QR
+            code.
           </p>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatValue}>4</span>
-              <span className={styles.heroStatLabel}>ways to fire the shutter</span>
-            </div>
-            <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>1</span>
-              <span className={styles.heroStatLabel}>QR scan to download</span>
+              <span className={styles.heroStatLabel}>iPad</span>
             </div>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>3</span>
-              <span className={styles.heroStatLabel}>hand gestures</span>
+              <span className={styles.heroStatLabel}>steps for guests</span>
+            </div>
+            <div className={styles.heroStat}>
+              <span className={styles.heroStatValue}>1</span>
+              <span className={styles.heroStatLabel}>scan to get your photos</span>
             </div>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>0</span>
-              <span className={styles.heroStatLabel}>apps for guests</span>
+              <span className={styles.heroStatLabel}>apps to install</span>
             </div>
           </div>
           <p className={`caption ${styles.heroBadge}`}>
@@ -155,25 +224,28 @@ export default function PhotoboothPage() {
           </h2>
           <div className={styles.overviewText}>
             <p className={styles.overviewLead}>
-              A full event photobooth with no special hardware: just an iPad
-              and a web page.
+              A photobooth has one job: take a good photo and get it into the
+              guest&apos;s hands.
             </p>
             <p className={styles.overviewBody}>
-              Each event gets its own frames, shot count, and countdown, set
-              up from an admin panel. Guests walk away with their photos on
-              their own phone.
+              So every part is kept simple. Simple to use, simple to explain,
+              simple to get your photos, and simple to set up for the next
+              event.
             </p>
           </div>
         </section>
 
-        {/* guest flow */}
-        <section className={styles.section} aria-labelledby="flow-h">
-          <h2 id="flow-h" className={`label ${styles.sectionLabel}`}>
-            The Guest Flow
+        {/* simple to use */}
+        <section className={styles.section} aria-labelledby="use-h">
+          <h2 id="use-h" className={`label ${styles.sectionLabel}`}>
+            Simple to Use
           </h2>
           <div className={styles.features}>
-            {flow.map((p) => (
+            {use.map((p) => (
               <div key={p.title} className={styles.feature}>
+                <div className={styles.illus}>
+                  <p.Visual />
+                </div>
                 <h3 className={styles.featureTitle}>{p.title}</h3>
                 <p className={styles.featureDesc}>{p.desc}</p>
               </div>
@@ -181,29 +253,90 @@ export default function PhotoboothPage() {
           </div>
         </section>
 
+        {/* simple instructions */}
+        <section className={styles.section} aria-labelledby="instructions-h">
+          <h2 id="instructions-h" className={`label ${styles.sectionLabel}`}>
+            Simple Instructions
+          </h2>
+          <p className={styles.instructionsIntro}>
+            This is everything the booth says, word for word. The steps are
+            written from the event&apos;s settings, so they always match what
+            the booth does.
+          </p>
+          <BoothPopup rules={instructions} note="Please be gentle with the iPad 😢" />
+        </section>
+
         {/* callout */}
         <div className={styles.callout}>
           <p className={styles.calloutText}>
-            Venue Wi-Fi is never a given, so the booth never waits on it.
+            If it needs a staff member standing next to it, it isn&apos;t
+            simple enough.
           </p>
         </div>
 
-        {/* how it works */}
+        {/* simple to keep */}
+        <section className={styles.section} aria-labelledby="keep-h">
+          <h2 id="keep-h" className={`label ${styles.sectionLabel}`}>
+            Simple to Get Your Photos
+          </h2>
+          <Flow steps={delivery} label="How a guest gets their photo" />
+          <div className={styles.note}>
+            <span className={styles.flowIcon}>{icons.wifiOff}</span>
+            <p className={styles.noteText}>
+              <strong>Wi-Fi down?</strong> The QR still works. Photos wait on
+              the iPad, retry every minute, and appear on the guest&apos;s
+              link once they land.
+            </p>
+          </div>
+          <div className={styles.chips}>
+            <span className={styles.chip}>No app</span>
+            <span className={styles.chip}>No sign-up</span>
+            <span className={styles.chip}>Nothing to type</span>
+          </div>
+        </section>
+
+        {/* simple to set up */}
+        <section className={styles.section} aria-labelledby="setup-h">
+          <h2 id="setup-h" className={`label ${styles.sectionLabel}`}>
+            Simple to Set Up an Event
+          </h2>
+          <div className={styles.frames}>
+            <figure className={styles.frame}>
+              <Image
+                src="/images/photobooth/frame-starter.png"
+                alt="Canva starter file with three magenta photo windows"
+                width={540}
+                height={960}
+                sizes="(max-width: 680px) 38vw, 180px"
+                className={styles.frameImg}
+              />
+              <figcaption className="caption">Starter file</figcaption>
+            </figure>
+            <span className={styles.framesArrow} aria-hidden="true">
+              →
+            </span>
+            <figure className={styles.frame}>
+              <Image
+                src="/images/photobooth/frame-finished.webp"
+                alt="Finished three-photo frame designed for a conference"
+                width={540}
+                height={960}
+                sizes="(max-width: 680px) 38vw, 180px"
+                className={styles.frameImg}
+              />
+              <figcaption className="caption">Finished frame</figcaption>
+            </figure>
+          </div>
+          <Steps items={setup} numbered />
+        </section>
+
+        {/* simple system */}
         <section className={styles.section} aria-labelledby="system-h">
           <h2 id="system-h" className={`label ${styles.sectionLabel}`}>
-            How It Works
+            Simple Under the Hood
           </h2>
-          <ol className={styles.sysList}>
-            {system.map((s, i) => (
-              <li key={s.title} className={styles.sysItem}>
-                <span className={`caption ${styles.sysNum}`}>0{i + 1}</span>
-                <div className={styles.sysBody}>
-                  <h3 className={styles.sysTitle}>{s.title}</h3>
-                  <p className={styles.sysDesc}>{s.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <Flow steps={architecture} label="The whole system" />
+          <Steps items={system} />
         </section>
 
         {/* live site */}

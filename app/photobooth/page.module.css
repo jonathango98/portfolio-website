@@ -305,3 +305,359 @@
   flex-wrap: wrap;
   gap: var(--space-3);
 }
+
+/* ---------- tablet illustrations ---------- */
+.illus {
+  display: flex;
+  justify-content: center;
+  background: var(--mist);
+  border-radius: var(--r-md);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.illus svg {
+  width: 100%;
+  max-width: 170px;
+  height: auto;
+  overflow: visible;
+}
+
+.svBezel {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.svScreen {
+  fill: var(--hairline);
+}
+
+.svPerson {
+  fill: var(--slate);
+  opacity: 0.35;
+}
+
+.svInk {
+  fill: var(--ink);
+}
+
+.svPaper {
+  fill: var(--paper);
+}
+
+.svSignal {
+  fill: var(--signal);
+}
+
+.svSignalRing {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  opacity: 0.45;
+}
+
+.svCheck {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.svFrame {
+  fill: var(--paper);
+  stroke: var(--slate);
+  stroke-width: 1;
+}
+
+.svFrameActive {
+  fill: var(--paper);
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+
+.svWindow {
+  fill: var(--hairline);
+}
+
+.svPhone {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.svDash {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+
+.svTextLight,
+.svTextInk {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.svTextLight {
+  fill: var(--paper);
+}
+
+.svTextInk {
+  fill: var(--ink);
+}
+
+/* ---------- on-screen instructions mock ---------- */
+.booth {
+  max-width: 440px;
+  margin: var(--space-6) 0 0;
+  border: 10px solid var(--ink);
+  border-radius: 28px;
+  background: linear-gradient(150deg, #6b4430 0%, #2d2a2c 55%, #8a3a1c 100%);
+  padding: clamp(24px, 6vw, 48px) clamp(16px, 5vw, 40px);
+  display: grid;
+  place-items: center;
+}
+
+.instructionsIntro {
+  max-width: var(--measure);
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.popup {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #14181f;
+  border-radius: var(--r-md);
+  padding: var(--space-5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.popupTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.popupList {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.25em;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.popupNote {
+  font-size: 0.8125rem;
+  color: #6e7681;
+  margin-bottom: var(--space-4);
+}
+
+.popupBtn {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 999px;
+  background: #14181f;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* ---------- flow diagrams ---------- */
+.flow {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  display: flex;
+  gap: 32px;
+}
+
+.flowStep {
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
+.flowNode {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-3);
+  background: var(--mist);
+  border-radius: var(--r-md);
+}
+
+.flowIcon {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--signal);
+  display: grid;
+  place-items: center;
+}
+
+.flowIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.flowText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.flowTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.flowSub {
+  font-size: 0.8125rem;
+  color: var(--slate);
+  line-height: 1.4;
+}
+
+.flowChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+.flowChip {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--slate);
+}
+
+.flowArrow {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 32px;
+  transform: translateY(-50%);
+  text-align: center;
+  color: var(--slate);
+  font-size: 1.125rem;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  border: 1.5px dashed var(--hairline);
+  border-radius: var(--r-md);
+  padding: var(--space-4) var(--space-5);
+}
+
+.noteText {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+.noteText strong {
+  color: var(--ink);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.chip {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--signal-wash);
+  color: var(--ink);
+}
+
+/* ---------- frame before/after ---------- */
+.frames {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  background: var(--mist);
+  border-radius: var(--r-md);
+  padding: var(--space-6) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.frame {
+  flex: 0 1 180px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.frameImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(20, 24, 31, 0.12);
+}
+
+.framesArrow {
+  color: var(--slate);
+  font-size: 1.25rem;
+}
+
+@media (max-width: 680px) {
+  .flow {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .flowNode {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .flowChips {
+    justify-content: flex-start;
+  }
+
+  .flowArrow {
+    top: 100%;
+    left: 50%;
+    width: 28px;
+    line-height: 28px;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .illus svg {
+    max-width: 130px;
+  }
+
+  .frames {
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4);
+  }
+}
