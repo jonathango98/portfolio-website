@@ -1,0 +1,762 @@
+/* ---------- page wrapper ---------- */
+.page {
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-bottom: var(--space-9);
+}
+
+/* ---------- back link ---------- */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: clamp(80px, 14vh, 120px);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+  transition: color var(--t-fast) var(--ease-out);
+}
+.back:hover {
+  color: var(--ink);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding-top: var(--space-8);
+  padding-bottom: clamp(64px, 10vw, 96px);
+}
+
+.heroEyebrow {
+  margin-bottom: var(--space-5);
+}
+
+.heroTitle {
+  font-size: clamp(2.75rem, 9vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: var(--space-6);
+}
+
+.heroSub {
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  color: var(--slate);
+  line-height: 1.55;
+  max-width: 44ch;
+  margin-bottom: var(--space-4);
+}
+
+.heroBadge {
+  display: block;
+}
+
+/* ---------- hero stat strip ---------- */
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-5);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--space-4) var(--space-5);
+  flex: 1;
+  min-width: 0;
+  border-right: 1px solid var(--hairline);
+}
+
+.heroStat:last-child {
+  border-right: none;
+}
+
+.heroStatValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.heroStatLabel {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ---------- shared section frame ---------- */
+.section {
+  padding-block: clamp(48px, 8vw, 80px);
+  border-top: 1px solid var(--hairline);
+}
+
+.sectionLabel {
+  margin-bottom: var(--space-6);
+}
+
+/* ---------- overview ---------- */
+.overview {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.overviewLead {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: var(--space-5);
+}
+
+.overviewBody {
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.overviewImage {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--mist);
+  padding: var(--space-5);
+}
+
+.overviewImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ---------- design principles ---------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.feature {
+  padding-top: var(--space-5);
+  border-top: 2px solid var(--signal);
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: var(--space-3);
+}
+
+.featureDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- callout ---------- */
+.callout {
+  background: var(--mist);
+  border-radius: var(--r-md);
+  padding: clamp(28px, 6vw, 56px);
+  margin-block: clamp(48px, 8vw, 80px);
+}
+
+.calloutText {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 48ch;
+  margin: 0;
+}
+
+/* ---------- how it works ---------- */
+.sysList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.guardrails {
+  margin-top: var(--space-7);
+}
+
+.sysItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.sysItem:first-child {
+  padding-top: 0;
+}
+
+.sysNum {
+  flex-shrink: 0;
+  color: var(--signal);
+  width: 2ch;
+}
+
+.sysTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-2);
+}
+
+.sysDesc {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 62ch;
+}
+
+/* ---------- full project site ---------- */
+.ctaLead {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  max-width: 40ch;
+  margin-bottom: var(--space-6);
+  margin-top: 0;
+}
+
+.siteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: var(--r-sm);
+  padding: 12px 24px;
+  transition: background var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.siteButton:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* ---------- footer ---------- */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: clamp(48px, 8vw, 80px);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 680px) {
+  .heroStat {
+    flex: 0 0 50%;
+  }
+
+  .heroStat:nth-child(2) {
+    border-right: none;
+  }
+
+  .heroStat:nth-child(3),
+  .heroStat:nth-child(4) {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .overview {
+    grid-template-columns: 1fr;
+  }
+
+  .overviewImage {
+    order: -1;
+    max-width: 320px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ---------- shared diagram bits ----------
+   Every diagram is built in markup rather than as an image so it reflows on
+   narrow screens and uses the theme's own colours. */
+.sectionIntro {
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.6;
+  max-width: 58ch;
+  margin-bottom: var(--space-6);
+}
+
+.diagramNote {
+  display: block;
+  margin-top: var(--space-5);
+  color: var(--slate);
+}
+
+/* ---------- launch video ---------- */
+.video {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.videoEl {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* ---------- the app (phone screens) ---------- */
+.screens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.phone {
+  border: 1px solid var(--hairline);
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--mist);
+  box-shadow: 0 12px 32px -18px rgba(20, 24, 31, 0.35);
+  margin-bottom: var(--space-4);
+}
+
+.phoneImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screenTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.screenDesc {
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+/* ---------- points per action (bar list) ----------
+   One series, so one colour; every bar carries its value as text. */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.pointsGroupLabel {
+  display: block;
+  color: var(--slate);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-3);
+}
+
+.pointsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pointsRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--hairline);
+}
+
+.pointsAction {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.pointsLink {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.pointsLink:hover {
+  color: var(--signal);
+}
+
+.pointsRule {
+  color: var(--slate);
+  font-weight: 400;
+}
+
+.pointsTrack {
+  display: block;
+  height: 10px;
+}
+
+.pointsBar {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  background: var(--ink);
+  border-radius: 0 4px 4px 0;
+}
+
+.pointsValue {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- one scan (flow row) ---------- */
+.flowRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--signal);
+}
+
+/* arrow sitting on the rule between stages */
+.stage:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: -0.8em;
+  right: calc(-1 * var(--space-5) / 2 - 0.5em);
+  width: 1em;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--signal);
+  background: var(--paper);
+}
+
+.stageTag {
+  color: var(--slate);
+}
+
+.stageTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.stageDetail {
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.flowReturn {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--hairline);
+}
+
+.flowReturnArrow {
+  color: var(--signal);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---------- three days (game state timeline) ----------
+   Paused carries a hatch as well as a lighter fill, so the states never
+   rely on colour alone. */
+.legend {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  font-size: 0.8125rem;
+  color: var(--slate);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  display: inline-block;
+  width: 22px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.state_on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.state_paused {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--hairline) 0 4px,
+    var(--mist) 4px 8px
+  );
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  color: var(--slate);
+}
+
+.state_off {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--slate);
+  color: var(--slate);
+}
+
+.days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* one timeline row per day: name on the left, bar and story on the right */
+.dayItem {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  column-gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.dayHead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dayName {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.dayWhen {
+  color: var(--slate);
+}
+
+.dayBar {
+  display: flex;
+  gap: 2px;
+  height: 32px;
+  margin-bottom: var(--space-3);
+}
+
+.daySeg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.daySegLabel {
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-inline: 4px;
+}
+
+.dayWhat {
+  grid-column: 2;
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+/* ---------- architecture ---------- */
+.arch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1.1fr) 40px minmax(0, 1fr);
+  align-items: center;
+  margin-bottom: var(--space-7);
+}
+
+.archCol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.archNode {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+
+.archNodeQuiet {
+  border-style: dashed;
+}
+
+.archNodeTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.archNodeDesc {
+  color: var(--slate);
+}
+
+.archCore {
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 1px solid var(--ink);
+  background: var(--mist);
+}
+
+.archCoreTag {
+  color: var(--slate);
+  margin-bottom: var(--space-1);
+}
+
+.archStep {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: var(--space-2) var(--space-3);
+  background: var(--paper);
+  border-radius: 6px;
+  border-left: 2px solid var(--signal);
+}
+
+.archArrow {
+  justify-self: center;
+  width: 100%;
+  height: 1px;
+  background: var(--slate);
+  position: relative;
+}
+.archArrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -4px;
+  border-left: 7px solid var(--slate);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+}
+
+@media (max-width: 680px) {
+  .screens {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+
+  .pointsRow {
+    grid-template-columns: minmax(0, 1fr) 4.5rem;
+    gap: var(--space-2) var(--space-4);
+  }
+  .pointsAction {
+    grid-column: 1 / -1;
+  }
+
+  .flowRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .dayItem {
+    grid-template-columns: 1fr;
+  }
+  .dayHead {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+  }
+  .dayWhat {
+    grid-column: 1;
+  }
+  .stage:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    right: auto;
+    left: 0;
+    bottom: calc(-1 * var(--space-6) / 2 - 0.8em);
+  }
+
+  .arch {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+  .archArrow {
+    width: 1px;
+    height: 28px;
+  }
+  .archArrow::after {
+    right: -4px;
+    top: auto;
+    bottom: 0;
+    border-left: 4.5px solid transparent;
+    border-right: 4.5px solid transparent;
+    border-top: 7px solid var(--slate);
+    border-bottom: 0;
+  }
+}

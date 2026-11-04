@@ -27,6 +27,19 @@ const routes: {
     priority: 0.9,
   },
   {
+    path: "/sidequest",
+    images: ["/images/sidequest/home.jpg", "/images/sidequest/code.jpg"],
+    lastModified: "2026-11-04T12:00:00-08:00", // app/sidequest/page.tsx
+    changeFrequency: "monthly",
+    priority: 0.7,
+  },
+  {
+    path: "/photobooth",
+    lastModified: "2026-11-04T12:00:00-08:00", // app/photobooth/page.tsx
+    changeFrequency: "yearly",
+    priority: 0.7,
+  },
+  {
     path: "/life",
     images: ["/images/headshot-life.jpeg"],
     lastModified: "2026-07-16T20:30:23-07:00", // app/life/page.tsx
