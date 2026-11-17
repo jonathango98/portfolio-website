@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
+import Hairline from "@/components/Hairline";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
@@ -80,7 +81,11 @@ const heroStats = [
 ];
 
 const heroMeta = [
-  { label: "Role", value: "Data Operations Shift Lead" },
+  {
+    label: "Role",
+    value: "Data Operations Shift Lead",
+    detail: "RoboForce Inc.\nMilpitas, CA · Apr 2026 – Present",
+  },
   { label: "Platforms", value: "RoboForce Titan · Universal Robots UR5e" },
   { label: "Controllers", value: "GELLO · UMI · Vive Trackers · VR" },
   { label: "Output", value: "Demonstration data for VLA training" },
@@ -88,30 +93,22 @@ const heroMeta = [
 
 const capabilities = [
   {
-    tag: "01",
     title: "Teleoperation Systems",
-    tech: "GELLO · UMI · Vive Trackers · VR",
     lead: "The rig is the ceiling on everything downstream.",
     desc: "I improve the setup in hardware and software. Every gain multiplies across 20+ operators at once.",
   },
   {
-    tag: "02",
     title: "Task Design & SOPs",
-    tech: "Methodology",
     lead: "I write the SOPs from doing the task, not from watching it.",
     desc: "Not just the procedure — the specific way of performing it that a human repeats without drifting and a model can still learn.",
   },
   {
-    tag: "03",
     title: "Team Operations",
-    tech: "20+ operators",
     lead: "Hiring through performance review, built as systems that run themselves.",
     desc: "Interviewing, onboarding, training, daily summaries, scheduling, reviews, continuous feedback — automated wherever it would otherwise become recurring manual work.",
   },
   {
-    tag: "04",
     title: "Station Uptime",
-    tech: "Linux · Python · ROS 2",
     lead: "A down station is data that never gets collected.",
     desc: "I triage failures directly — terminal, logs, ROS 2 graph — and work with engineering on the rest.",
   },
@@ -183,12 +180,6 @@ const directions = [
   },
 ];
 
-const stack = [
-  "RoboForce Titan", "Universal Robots UR5e", "GELLO",
-  "UMI", "Vive Trackers", "VR Controllers",
-  "ROS 2", "Python", "Linux",
-];
-
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/jonathangoenadibrata/" },
   { label: "GitHub", href: "https://github.com/jonathango98" },
@@ -209,16 +200,20 @@ export default function RoboforcePage() {
 
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <header className={styles.hero}>
-          <p className={`label ${styles.heroEyebrow}`}>
-            RoboForce Inc. · Robot Learning Data
-          </p>
-          <h1 className={styles.heroTitle}>
-            Teleoperation<br />at Scale
-          </h1>
-          <p className={styles.heroSub}>
-            20+ operators on real-time robotic control. My job is volume
-            that a model can actually learn from.
-          </p>
+          <div className={styles.heroMain}>
+            <div>
+              <h1 className={styles.heroTitle}>
+                Teleoperation<br />at Scale
+              </h1>
+              <p className={styles.heroSub}>
+                20+ operators on real-time robotic control. My job is volume
+                that a model can actually learn from.
+              </p>
+            </div>
+            <div className={styles.heroFigure}>
+              <Hairline name="gello" label="Two GELLO leader arms driving two UR arms mounted in a V" />
+            </div>
+          </div>
 
           <div className={styles.heroStats}>
             {heroStats.map((s) => (
@@ -236,15 +231,16 @@ export default function RoboforcePage() {
             ))}
           </div>
 
-          <p className={`caption ${styles.heroBadge}`}>
-            Data Operations Shift Lead · Milpitas, CA · Apr 2026 – Present
-          </p>
-
           <dl className={styles.heroMeta}>
             {heroMeta.map((m) => (
               <div key={m.label} className={styles.heroMetaItem}>
                 <dt className={`label ${styles.heroMetaLabel}`}>{m.label}</dt>
-                <dd className={styles.heroMetaValue}>{m.value}</dd>
+                <dd className={styles.heroMetaValue}>
+                  {m.value}
+                  {m.detail && (
+                    <span className={styles.heroMetaDetail}>{m.detail}</span>
+                  )}
+                </dd>
               </div>
             ))}
           </dl>
@@ -252,12 +248,9 @@ export default function RoboforcePage() {
 
         {/* ── Origin ───────────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="origin-h">
-          <h2 id="origin-h" className={`label ${styles.sectionLabel}`}>
-            Where This Started
-          </h2>
-          <p className={styles.originLead}>
+          <h2 id="origin-h" className={styles.originLead}>
             I was RoboForce&apos;s first data collector.
-          </p>
+          </h2>
           <p className={styles.originBody}>
             Before the team, the shifts, or the stations, there was one
             person and one open question, worked out with the AI engineers:
@@ -273,7 +266,7 @@ export default function RoboforcePage() {
 
         {/* ── The tension ──────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="challenge-h">
-          <h2 id="challenge-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="challenge-h" className={styles.sectionLabel}>
             The Challenge
           </h2>
           <p className={styles.sectionIntro}>
@@ -322,7 +315,7 @@ export default function RoboforcePage() {
 
         {/* ── The loop ─────────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="flow-h">
-          <h2 id="flow-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="flow-h" className={styles.sectionLabel}>
             Where We Sit
           </h2>
           <p className={styles.sectionIntro}>
@@ -373,7 +366,7 @@ export default function RoboforcePage() {
 
         {/* ── What I own ───────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="own-h">
-          <h2 id="own-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="own-h" className={styles.sectionLabel}>
             What I Own
           </h2>
           <p className={styles.sectionIntro}>
@@ -381,26 +374,18 @@ export default function RoboforcePage() {
           </p>
           <div className={styles.capabilities}>
             {capabilities.map((c) => (
-              <div key={c.tag} className={styles.capability}>
-                <span className={`caption ${styles.capTag}`}>
-                  {c.tag} <span className={styles.capTech}>{c.tech}</span>
-                </span>
+              <div key={c.title} className={styles.capability}>
                 <h3 className={styles.capTitle}>{c.title}</h3>
                 <p className={styles.lead}>{c.lead}</p>
                 <p className={styles.capDesc}>{c.desc}</p>
               </div>
             ))}
           </div>
-          <div className={styles.stackRow}>
-            {stack.map((s) => (
-              <span key={s} className={styles.stackBadge}>{s}</span>
-            ))}
-          </div>
         </section>
 
         {/* ── Systems built ────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="systems-h">
-          <h2 id="systems-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="systems-h" className={styles.sectionLabel}>
             Systems I Built
           </h2>
           <p className={styles.sectionIntro}>
@@ -409,10 +394,10 @@ export default function RoboforcePage() {
           <div className={styles.systems}>
             {systems.map((sys) => (
               <div key={sys.title} className={styles.system}>
-                <span className={`caption ${styles.systemTech}`}>{sys.tech}</span>
                 <h3 className={styles.systemTitle}>{sys.title}</h3>
                 <p className={styles.lead}>{sys.lead}</p>
                 <p className={styles.systemDesc}>{sys.desc}</p>
+                <span className={`caption ${styles.systemTech}`}>{sys.tech}</span>
               </div>
             ))}
           </div>
@@ -420,7 +405,7 @@ export default function RoboforcePage() {
 
         {/* ── Translation layer ────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="translate-h">
-          <h2 id="translate-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="translate-h" className={styles.sectionLabel}>
             Between the AI Team and the Floor
           </h2>
           <p className={styles.sectionIntro}>
@@ -443,28 +428,21 @@ export default function RoboforcePage() {
               </div>
             ))}
           </div>
-          <p className={styles.loopNote}>
-            Weekly targets come out of that exchange — collection
-            statistics on one side, the AI team&apos;s requirements on the
-            other. Reviews measure against that, not raw volume.
-          </p>
         </section>
 
         {/* ── Closing statement (peak-end) ─────────────────────────────── */}
         <div className={styles.closing}>
           <p className={styles.closingText}>
-            I was the first person collecting this data, and I still run a
-            controller. Every system here was built by someone who has to
-            use it.
+            I still run a controller. Every system here was built by
+            someone who has to use it.
           </p>
         </div>
 
         {/* ── Contact ──────────────────────────────────────────────────── */}
         <section className={styles.section} aria-labelledby="ct-h">
-          <h2 id="ct-h" className={`label ${styles.sectionLabel}`}>
-            Let&apos;s Connect
+          <h2 id="ct-h" className={styles.sectionLabel}>
+            Building something? Let&apos;s talk.
           </h2>
-          <p className={styles.ctaLead}>Building something? Let&apos;s talk.</p>
           <a
             className={styles.ctaEmail}
             href="mailto:jonathangoenadibrata@gmail.com"

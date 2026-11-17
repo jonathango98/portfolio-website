@@ -23,10 +23,11 @@ declare global {
   }
 }
 
-function load(src: string) {
+function load(src: string, module = false) {
   return new Promise<void>((resolve, reject) => {
     const s = document.createElement("script");
     s.src = src;
+    if (module) s.type = "module";
     s.onload = () => resolve();
     s.onerror = () => reject(new Error(`hairline: could not load ${src}`));
     document.head.append(s);
@@ -34,6 +35,7 @@ function load(src: string) {
 }
 
 // Each figure file ends by calling window.hairline(figure); load it once and keep the figure.
+// As a module, so two figures' top-level consts never collide after client-side navigation.
 const figures = new Map<string, Promise<Figure>>();
 function getFigure(name: string) {
   let f = figures.get(name);
@@ -41,7 +43,7 @@ function getFigure(name: string) {
     f = (async () => {
       if (!window.HL) await load("/hairline/kernel.js");
       const got = new Promise<Figure>((resolve) => (window.hairline = resolve));
-      await load(`/hairline/${name}.js`);
+      await load(`/hairline/${name}.js`, true);
       return got;
     })();
     figures.set(name, f);
