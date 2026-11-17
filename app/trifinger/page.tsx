@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
-import Image from "next/image";
+import Hairline from "@/components/Hairline";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
@@ -89,6 +89,13 @@ const principles: { title: string; desc: string }[] = [
   },
 ];
 
+const heroMeta: { label: string; value: string; detail?: string }[] = [
+  { label: "Course", value: "MAE 156B Senior Capstone", detail: "UC San Diego" },
+  { label: "Term", value: "Winter 2021" },
+  { label: "Team", value: "Team 03" },
+  { label: "Sponsor", value: "Prof. Xiaolong Wang", detail: "UCSD ECE" },
+];
+
 const system: { title: string; desc: string }[] = [
   {
     title: "Mechanical",
@@ -119,16 +126,20 @@ export default function TrifingerPage() {
 
         {/* hero */}
         <header className={styles.hero}>
-          <p className={`label ${styles.heroEyebrow}`}>
-            UC San Diego · MAE 156B Senior Capstone
-          </p>
-          <h1 className={styles.heroTitle}>
-            TriFinger<br />Manipulation
-          </h1>
-          <p className={styles.heroSub}>
-            A low-cost three-fingered manipulator, built in-house for
-            dexterous manipulation research.
-          </p>
+          <div className={styles.heroMain}>
+            <div>
+              <h1 className={styles.heroTitle}>
+                TriFinger<br />Manipulation
+              </h1>
+              <p className={styles.heroSub}>
+                A low-cost three-fingered manipulator, built in-house for
+                dexterous manipulation research.
+              </p>
+            </div>
+            <div className={styles.heroFigure}>
+              <Hairline name="trifinger" label="Three robot fingers hanging from a frame, pinching a cube in a round arena" />
+            </div>
+          </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>9</span>
@@ -147,43 +158,36 @@ export default function TrifingerPage() {
               <span className={styles.heroStatLabel}>printed structure</span>
             </div>
           </div>
-          <p className={`caption ${styles.heroBadge}`}>
-            Team 03 · Sponsored by Prof. Xiaolong Wang, UCSD ECE · Winter 2021
-          </p>
+          <dl className={styles.heroMeta}>
+            {heroMeta.map((m) => (
+              <div key={m.label}>
+                <dt className={`label ${styles.heroMetaLabel}`}>{m.label}</dt>
+                <dd className={styles.heroMetaValue}>
+                  {m.value}
+                  {m.detail && (
+                    <span className={styles.heroMetaDetail}>{m.detail}</span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </header>
 
         {/* overview */}
         <section className={styles.section} aria-labelledby="overview-h">
-          <h2 id="overview-h" className={`label ${styles.sectionLabel}`}>
-            Overview
+          <h2 id="overview-h" className={styles.overviewLead}>
+            A ground-up rebuild of the research-grade TriFinger robot:
+            cheaper, easier to source, easier to build.
           </h2>
-          <div className={styles.overview}>
-            <div className={styles.overviewText}>
-              <p className={styles.overviewLead}>
-                A ground-up rebuild of the research-grade TriFinger robot —
-                cheaper, easier to source, easier to build.
-              </p>
-              <p className={styles.overviewBody}>
-                Three fingers, nine joints: it grasps, lifts, and repositions
-                objects as a learning platform for UCSD robotics and ML
-                students.
-              </p>
-            </div>
-            <div className={styles.overviewImage}>
-              <Image
-                src="/images/robot-trifinger.png"
-                alt="TriFinger robot — three articulated fingers mounted above a shared workspace"
-                width={420}
-                height={420}
-                className={styles.overviewImg}
-              />
-            </div>
-          </div>
+          <p className={styles.overviewBody}>
+            Three fingers, nine joints: it grasps, lifts, and repositions
+            objects as a learning platform for UCSD robotics and ML students.
+          </p>
         </section>
 
         {/* design principles */}
         <section className={styles.section} aria-labelledby="principles-h">
-          <h2 id="principles-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="principles-h" className={styles.sectionLabel}>
             Design Principles
           </h2>
           <div className={styles.features}>
@@ -196,27 +200,16 @@ export default function TrifingerPage() {
           </div>
         </section>
 
-        {/* callout */}
-        <div className={styles.callout}>
-          <p className={styles.calloutText}>
-            Nine axes, sub-degree accuracy — from 3D-printed parts and
-            off-the-shelf components.
-          </p>
-        </div>
-
         {/* how it works */}
         <section className={styles.section} aria-labelledby="system-h">
-          <h2 id="system-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="system-h" className={styles.sectionLabel}>
             How It Works
           </h2>
           <ol className={styles.sysList}>
-            {system.map((s, i) => (
+            {system.map((s) => (
               <li key={s.title} className={styles.sysItem}>
-                <span className={`caption ${styles.sysNum}`}>0{i + 1}</span>
-                <div className={styles.sysBody}>
-                  <h3 className={styles.sysTitle}>{s.title}</h3>
-                  <p className={styles.sysDesc}>{s.desc}</p>
-                </div>
+                <h3 className={styles.sysTitle}>{s.title}</h3>
+                <p className={styles.sysDesc}>{s.desc}</p>
               </li>
             ))}
           </ol>
@@ -224,7 +217,7 @@ export default function TrifingerPage() {
 
         {/* full project site */}
         <section className={styles.section} aria-labelledby="site-h">
-          <h2 id="site-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="site-h" className={styles.sectionLabel}>
             Want the Full Story?
           </h2>
           <p className={styles.ctaLead}>
