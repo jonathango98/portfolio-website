@@ -36,16 +36,19 @@ function load(src: string, module = false) {
 
 // Each figure file ends by calling window.hairline(figure); load it once and keep the figure.
 // As a module, so two figures' top-level consts never collide after client-side navigation.
+// Figures share window.hairline, so two on one page load one after the other.
 const figures = new Map<string, Promise<Figure>>();
+let chain: Promise<unknown> = Promise.resolve();
 function getFigure(name: string) {
   let f = figures.get(name);
   if (!f) {
-    f = (async () => {
+    f = chain.then(async () => {
       if (!window.HL) await load("/hairline/kernel.js");
       const got = new Promise<Figure>((resolve) => (window.hairline = resolve));
       await load(`/hairline/${name}.js`, true);
       return got;
-    })();
+    });
+    chain = f.catch(() => {});
     figures.set(name, f);
   }
   return f;
