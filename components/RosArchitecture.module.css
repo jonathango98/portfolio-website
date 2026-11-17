@@ -1,0 +1,248 @@
+/* Wider than the text column on large screens; scrolls sideways on phones. */
+.figure {
+  margin: 0;
+  width: min(1144px, calc(100vw - 2 * var(--gutter)));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  min-width: 860px;
+  height: auto;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ---------- groups ---------- */
+.group {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.groupName {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--slate);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 8px;
+  stroke-linejoin: round;
+}
+
+/* ---------- edges ---------- */
+.edge {
+  fill: none;
+  stroke: var(--slate);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: stroke var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out);
+}
+
+.launch {
+  stroke-dasharray: 2 4;
+}
+
+.halo {
+  stroke: var(--paper);
+  stroke-width: 9;
+}
+
+.head {
+  fill: var(--slate);
+  transition: fill var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out);
+}
+
+.edge.send,
+.head.send {
+  stroke: var(--signal);
+  stroke-width: 2.25;
+}
+.head.send {
+  fill: var(--signal);
+  stroke: none;
+}
+
+.edge.receive,
+.head.receive {
+  stroke: var(--ink);
+  stroke-width: 2.25;
+}
+.head.receive {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.edge.dim,
+.head.dim {
+  opacity: 0.18;
+}
+
+/* ---------- topic labels ---------- */
+.label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+  transition: opacity var(--t-fast) var(--ease-out);
+}
+
+.topic {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+.type {
+  font-size: 10px;
+  fill: var(--slate);
+}
+
+.label.send .topic {
+  fill: var(--signal);
+}
+
+.label.dim {
+  opacity: 0.18;
+}
+
+/* ---------- nodes ---------- */
+.node {
+  cursor: pointer;
+  outline: none;
+  transition: opacity var(--t-fast) var(--ease-out);
+}
+
+.node rect {
+  stroke-width: 1.5;
+  transition: stroke var(--t-fast) var(--ease-out);
+}
+
+.node text {
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.ours rect {
+  fill: var(--paper);
+  stroke: var(--ink);
+}
+.ours text {
+  fill: var(--ink);
+}
+
+.existing rect {
+  fill: var(--mist);
+  stroke: var(--slate);
+  stroke-dasharray: 4 3;
+}
+.existing text {
+  fill: var(--ink);
+}
+
+.endpoint rect {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.endpoint text {
+  fill: var(--paper);
+}
+
+.node.on rect,
+.node:focus-visible rect {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+
+.node.dim {
+  opacity: 0.25;
+}
+
+/* ---------- caption: legend, or the trace of the active node ---------- */
+.caption {
+  min-height: 84px;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  font-size: 0.875rem;
+  color: var(--body, var(--slate));
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  width: 22px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1.5px solid;
+}
+.swatch.ours {
+  background: var(--paper);
+  border-color: var(--ink);
+}
+.swatch.existing {
+  background: var(--mist);
+  border-color: var(--slate);
+  border-style: dashed;
+}
+.swatch.endpoint {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.trace {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--body, var(--slate));
+}
+
+.trace dd {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+}
+
+.traceName {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-1);
+}
+
+.traceKey {
+  display: inline-block;
+  min-width: 9ch;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+}
+.traceKey.send {
+  color: var(--signal);
+}

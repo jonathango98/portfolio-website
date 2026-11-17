@@ -225,32 +225,6 @@
   margin: 0;
 }
 
-/* ---------- architecture ---------- */
-.archLink {
-  display: block;
-  color: var(--slate);
-  transition: color var(--t-fast) var(--ease-out);
-}
-.archLink:hover {
-  color: var(--ink);
-}
-
-.archImg {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-md);
-}
-
-.archCaption {
-  display: inline-block;
-  margin-top: var(--space-3);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.8125rem;
-  letter-spacing: 0.02em;
-}
-
 /* ---------- engineering decisions ---------- */
 .sysList {
   list-style: none;

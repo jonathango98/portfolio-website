@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hairline from "@/components/Hairline";
-import Image from "next/image";
+import RosArchitecture from "@/components/RosArchitecture";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
@@ -267,23 +267,7 @@ export default function RosmasterPage() {
             pipelines; both converge on a master script that plans navigation
             and commands the rescue tool.
           </p>
-          <a
-            href="/images/rosmaster-software-architecture.jpg"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.archLink}
-          >
-            <Image
-              src="/images/rosmaster-software-architecture.jpg"
-              alt="ROSMASTER software architecture diagram showing the ROS 2 node graph"
-              width={8823}
-              height={5553}
-              className={styles.archImg}
-            />
-            <span className={styles.archCaption}>
-              Open full size <span aria-hidden="true">↗</span>
-            </span>
-          </a>
+          <RosArchitecture />
         </section>
 
         {/* decisions */}
