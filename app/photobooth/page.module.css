@@ -41,6 +41,30 @@
   margin-bottom: var(--space-6);
 }
 
+.heroMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.heroFigure {
+  margin-right: calc(var(--gutter) * -0.5);
+}
+
+@media (max-width: 760px) {
+  .heroMain {
+    grid-template-columns: 1fr;
+  }
+
+  .heroFigure {
+    margin-right: 0;
+    max-width: 400px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
 .heroSub {
   font-size: clamp(1.0625rem, 2vw, 1.25rem);
   color: var(--slate);

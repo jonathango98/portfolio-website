@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
 import Nav from "@/components/Nav";
+import Hairline from "@/components/Hairline";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -186,14 +187,21 @@ export default function PhotoboothPage() {
 
         {/* hero */}
         <header className={styles.hero}>
-          <p className={`label ${styles.heroEyebrow}`}>
-            Side Project · Live
-          </p>
-          <h1 className={styles.heroTitle}>Photobooth</h1>
-          <p className={styles.heroSub}>
-            A photobooth built to be simple. An iPad, a web page, and a QR
-            code.
-          </p>
+          <div className={styles.heroMain}>
+            <div>
+              <p className={`label ${styles.heroEyebrow}`}>
+                Side Project · Live
+              </p>
+              <h1 className={styles.heroTitle}>Photobooth</h1>
+              <p className={styles.heroSub}>
+                A photobooth built to be simple. An iPad, a web page, and a QR
+                code.
+              </p>
+            </div>
+            <div className={styles.heroFigure}>
+              <Hairline name="photobooth" label="A landscape iPad on a tripod beside a photo strip of three square portraits" />
+            </div>
+          </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>1</span>
