@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
-import Image from "next/image";
+import Hairline from "@/components/Hairline";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { SITE_URL } from "@/app/site";
@@ -130,17 +130,24 @@ export default function FodTestingPage() {
 
         {/* hero */}
         <header className={styles.hero}>
-          <p className={`label ${styles.heroEyebrow}`}>
-            Apple Inc. · Product Safety Automation
-          </p>
-          <h1 className={styles.heroTitle}>
-            Foreign Object<br />Detection
-          </h1>
-          <p className={styles.heroSub}>
-            Robotic systems that run Apple&apos;s wireless-charging safety
-            tests end to end — device prep, test execution, temperature data
-            collection — unattended, overnight.
-          </p>
+          <div className={styles.heroMain}>
+            <div>
+              <p className={`label ${styles.heroEyebrow}`}>
+                Apple Inc. · Product Safety Automation
+              </p>
+              <h1 className={styles.heroTitle}>
+                Foreign Object<br />Detection
+              </h1>
+              <p className={styles.heroSub}>
+                Robotic systems that run Apple&apos;s wireless-charging safety
+                tests end to end — device prep, test execution, temperature
+                data collection — unattended, overnight.
+              </p>
+            </div>
+            <div className={styles.heroFigure}>
+              <Hairline name="fod" label={heroImage.alt} />
+            </div>
+          </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>2,700</span>
@@ -173,15 +180,6 @@ export default function FodTestingPage() {
             <div className={styles.challengeCol}>
               <p className={`label ${styles.colLabel}`}>Low Complexity</p>
               <p className={styles.colIntro}>The task itself is <strong>simple</strong>.</p>
-              <div className={styles.fodDiagram}>
-                <Image
-                  src="/images/fod.png"
-                  alt="Test setup: phone (receiver), foreign object, and wireless charger (transmitter)"
-                  width={400}
-                  height={560}
-                  className={styles.fodDiagramImg}
-                />
-              </div>
               <ol className={styles.steps}>
                 {[
                   "Place foreign object",
@@ -196,6 +194,10 @@ export default function FodTestingPage() {
                   </li>
                 ))}
               </ol>
+              <div className={styles.volumeTotal}>
+                <span className={`${styles.volumeTotalN} ${styles.oneTest}`}>1</span>
+                <span className={styles.volumeTotalLabel}>test</span>
+              </div>
             </div>
 
             <div className={styles.challengeDivider} aria-hidden="true" />
@@ -206,6 +208,13 @@ export default function FodTestingPage() {
               <div className={styles.volumeGrid}>
                 {volumeCards.map((c) => (
                   <div key={c.label} className={styles.volumeCard}>
+                    <span
+                      className={styles.dots}
+                      style={{ gridTemplateColumns: `repeat(${Math.min(Number(c.n), 5)}, 4px)` }}
+                      aria-hidden="true"
+                    >
+                      {Array.from({ length: Number(c.n) }, (_, i) => <i key={i} />)}
+                    </span>
                     <span className={styles.volumeN}>{c.n}</span>
                     <span className={styles.volumeFactorLabel}>{c.label}</span>
                   </div>
@@ -234,8 +243,9 @@ export default function FodTestingPage() {
             The Solution
           </h2>
           <div className={styles.features}>
-            {features.map((f) => (
+            {features.map((f, i) => (
               <div key={f.title} className={styles.feature}>
+                <span className={`caption ${styles.featureNum}`}>0{i + 1}</span>
                 <h3 className={styles.featureTitle}>{f.title}</h3>
                 <p className={styles.featureDesc}>{f.desc}</p>
               </div>

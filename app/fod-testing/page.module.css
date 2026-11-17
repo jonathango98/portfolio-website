@@ -29,6 +29,17 @@
   padding-bottom: clamp(64px, 10vw, 96px);
 }
 
+.heroMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.heroFigure {
+  margin-right: calc(var(--gutter) * -0.5);
+}
+
 .heroEyebrow {
   margin-bottom: var(--space-5);
 }
@@ -109,11 +120,12 @@
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   gap: 0 clamp(32px, 6vw, 64px);
-  align-items: start;
+  align-items: stretch;
 }
 
 .challengeCol {
-  /* column container */
+  display: flex;
+  flex-direction: column;
 }
 
 .challengeDivider {
@@ -140,13 +152,22 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-2);
+  flex: 1;
 }
 
 .stepItem {
+  flex: 1;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  padding: var(--space-4) var(--space-5);
+}
+
+.volumeTotalN.oneTest {
+  color: var(--ink);
 }
 
 .stepNum {
@@ -158,24 +179,6 @@
 .stepText {
   font-size: 1rem;
   font-weight: 500;
-}
-
-/* ---------- fod diagram (low complexity) ---------- */
-.fodDiagram {
-  margin-block: var(--space-5);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  border: 1px solid var(--hairline);
-  padding: var(--space-5);
-  background: white;
-}
-
-.fodDiagramImg {
-  width: 100%;
-  height: 260px;
-  object-fit: contain;
-  display: block;
-  background: white;
 }
 
 /* ---------- high volume grid ---------- */
@@ -192,6 +195,19 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.dots {
+  display: grid;
+  gap: 3px;
+  margin-bottom: var(--space-2);
+}
+
+.dots i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--slate);
 }
 
 .volumeN {
@@ -240,8 +256,8 @@
 
 /* ---------- callout ---------- */
 .callout {
-  background: var(--mist);
-  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
   padding: clamp(28px, 6vw, 56px);
   margin-block: clamp(48px, 8vw, 80px);
 }
@@ -261,12 +277,20 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
-  align-items: start;
+  align-items: stretch;
 }
 
 .feature {
-  padding-top: var(--space-5);
-  border-top: 2px solid var(--signal);
+  height: 100%;
+  padding: var(--space-5);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+}
+
+.featureNum {
+  display: block;
+  color: var(--signal);
+  margin-bottom: var(--space-4);
 }
 
 .featureTitle {
@@ -398,6 +422,19 @@
 }
 
 /* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  .heroMain {
+    grid-template-columns: 1fr;
+  }
+
+  .heroFigure {
+    margin-right: 0;
+    max-width: 400px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 680px) {
   .heroStat {
     flex: 0 0 50%;
@@ -420,7 +457,7 @@
     display: none;
   }
 
-  .challengeCol + .challengeCol {
+  .challengeDivider + .challengeCol {
     margin-top: var(--space-7);
   }
 

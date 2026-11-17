@@ -1,0 +1,24 @@
+.frame {
+  position: relative;
+}
+
+/* The kernel's own CSS sets these too, but only once its script has run: reserve the space now. */
+.stage {
+  display: block;
+  aspect-ratio: 5 / 4;
+  width: 100%;
+  --hairline-plate: var(--paper);
+  --hairline-hi: var(--signal);
+}
+
+.read {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--slate);
+  pointer-events: none;
+}
