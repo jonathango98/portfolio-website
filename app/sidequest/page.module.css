@@ -104,7 +104,7 @@
 /* ---------- hero meta ---------- */
 .heroMeta {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
   margin: 0;
   padding-top: var(--space-6);
@@ -171,27 +171,16 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.guardrails {
-  margin-top: var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
 }
 
 .sysItem {
-  padding-block: var(--space-5);
-  border-bottom: 1px solid var(--hairline);
-}
-
-.sysItem:first-child {
-  padding-top: 0;
-}
-
-/* The next section's top rule closes the list. */
-.sysItem:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+  padding: var(--space-5);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--paper);
 }
 
 .sysTitle {
@@ -249,6 +238,10 @@
 
 /* ---------- responsive ---------- */
 @media (max-width: 880px) {
+  .sysList {
+    grid-template-columns: 1fr;
+  }
+
   .heroMeta {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-5) var(--space-6);
@@ -268,22 +261,6 @@
   }
 }
 
-@media (max-width: 680px) {
-  .heroStat {
-    flex: 0 0 50%;
-  }
-
-  .heroStat:nth-child(2n + 1) {
-    padding-left: 0;
-  }
-  .heroStat:nth-child(2n) {
-    border-right: none;
-  }
-  .heroStat:nth-child(n + 3) {
-    border-top: 1px solid var(--hairline);
-  }
-}
-
 /* ---------- shared diagram bits ----------
    Every diagram is built in markup rather than as an image so it reflows on
    narrow screens and uses the theme's own colours. */
@@ -293,12 +270,6 @@
   line-height: 1.6;
   max-width: 58ch;
   margin-bottom: var(--space-6);
-}
-
-.diagramNote {
-  display: block;
-  margin-top: var(--space-5);
-  color: var(--slate);
 }
 
 /* ---------- launch video ---------- */
@@ -345,265 +316,6 @@
   font-size: 0.9375rem;
   font-weight: 600;
   margin-bottom: var(--space-1);
-}
-
-.screenDesc {
-  font-size: 0.875rem;
-  color: var(--slate);
-  line-height: 1.55;
-}
-
-/* ---------- points per action (bar list) ----------
-   One series, so one colour; every bar carries its value as text. */
-.points {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.pointsGroupLabel {
-  display: block;
-  color: var(--slate);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: var(--space-3);
-}
-
-.pointsList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.pointsRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 4.5rem;
-  align-items: center;
-  gap: var(--space-5);
-  padding-block: var(--space-3);
-  border-top: 1px solid var(--hairline);
-}
-
-.pointsAction {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-}
-
-.pointsLink {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--hairline);
-  text-underline-offset: 3px;
-  transition: color var(--t-fast) var(--ease-out);
-}
-.pointsLink:hover {
-  color: var(--signal);
-}
-
-.pointsRule {
-  color: var(--slate);
-  font-weight: 400;
-}
-
-.pointsTrack {
-  display: block;
-  height: 10px;
-}
-
-.pointsBar {
-  display: block;
-  height: 100%;
-  min-width: 6px;
-  background: var(--ink);
-  border-radius: 0 4px 4px 0;
-}
-
-.pointsValue {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-align: right;
-  white-space: nowrap;
-}
-
-/* ---------- one scan (flow row) ---------- */
-.flowRow {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-5);
-}
-
-.stage {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding-top: var(--space-4);
-  border-top: 2px solid var(--signal);
-}
-
-/* arrow sitting on the rule between stages */
-.stage:not(:last-child)::after {
-  content: "→";
-  position: absolute;
-  top: -0.8em;
-  right: calc(-1 * var(--space-5) / 2 - 0.5em);
-  width: 1em;
-  text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--signal);
-  background: var(--paper);
-}
-
-.stageTag {
-  color: var(--slate);
-}
-
-.stageTitle {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.stageDetail {
-  font-size: 0.9375rem;
-  color: var(--body);
-  line-height: 1.6;
-}
-
-.flowReturn {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  font-size: 0.875rem;
-  color: var(--slate);
-  line-height: 1.6;
-  max-width: 62ch;
-  margin: var(--space-6) 0 0;
-  padding-top: var(--space-4);
-  border-top: 1px dashed var(--hairline);
-}
-
-.flowReturnArrow {
-  color: var(--signal);
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-/* ---------- three days (game state timeline) ----------
-   Paused carries a hatch as well as a lighter fill, so the states never
-   rely on colour alone. */
-.legend {
-  list-style: none;
-  margin: 0 0 var(--space-5);
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5);
-  font-size: 0.8125rem;
-  color: var(--slate);
-}
-
-.legendItem {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.swatch {
-  display: inline-block;
-  width: 22px;
-  height: 12px;
-  border-radius: 3px;
-}
-
-.state_on {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.state_paused {
-  background: repeating-linear-gradient(
-    135deg,
-    var(--hairline) 0 4px,
-    var(--mist) 4px 8px
-  );
-  box-shadow: inset 0 0 0 1px var(--hairline);
-  color: var(--slate);
-}
-
-.state_off {
-  background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--slate);
-  color: var(--slate);
-}
-
-.days {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* one timeline row per day: name on the left, bar and story on the right */
-.dayItem {
-  display: grid;
-  grid-template-columns: 9rem minmax(0, 1fr);
-  column-gap: var(--space-5);
-  padding-block: var(--space-5);
-  border-top: 1px solid var(--hairline);
-}
-
-.dayHead {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.dayName {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.dayWhen {
-  color: var(--slate);
-}
-
-.dayBar {
-  display: flex;
-  gap: 2px;
-  height: 32px;
-  margin-bottom: var(--space-3);
-}
-
-.daySeg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.daySegLabel {
-  font-size: 0.6875rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-inline: 4px;
-}
-
-.dayWhat {
-  grid-column: 2;
-  font-size: 0.875rem;
-  color: var(--slate);
-  line-height: 1.6;
 }
 
 /* ---------- architecture ---------- */
@@ -688,38 +400,6 @@
   .screens {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-6) var(--space-4);
-  }
-
-  .pointsRow {
-    grid-template-columns: minmax(0, 1fr) 4.5rem;
-    gap: var(--space-2) var(--space-4);
-  }
-  .pointsAction {
-    grid-column: 1 / -1;
-  }
-
-  .flowRow {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-  .dayItem {
-    grid-template-columns: 1fr;
-  }
-  .dayHead {
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: var(--space-3);
-  }
-  .dayWhat {
-    grid-column: 1;
-  }
-  .stage:not(:last-child)::after {
-    content: "↓";
-    top: auto;
-    right: auto;
-    left: 0;
-    bottom: calc(-1 * var(--space-6) / 2 - 0.8em);
   }
 
   .arch {
