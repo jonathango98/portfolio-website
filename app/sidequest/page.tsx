@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
+import Hairline from "@/components/Hairline";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -39,6 +40,13 @@ export const metadata: Metadata = {
 
 const pageUrl = `${SITE_URL}/sidequest`;
 
+const heroMeta: { label: string; value: string; detail?: string }[] = [
+  { label: "Event", value: "NextGen Conference 2027", detail: "March 2027" },
+  { label: "Status", value: "In development" },
+  { label: "Role", value: "Lead developer" },
+  { label: "Team", value: "Volunteers" },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -73,7 +81,7 @@ const screens: { src: string; title: string; desc: string }[] = [
   {
     src: "/images/sidequest/join.jpg",
     title: "Join",
-    desc: "Name, church, and a PIN. Others see only first name and church.",
+    desc: "Name, church, and an age check. A PIN comes next. Others see only first name and church.",
   },
   {
     src: "/images/sidequest/home.jpg",
@@ -111,7 +119,7 @@ const points: {
     group: "Sessions",
     rows: [
       { action: "Check in before a session", pts: 25, prefix: "up to ", rule: "First 10 in earn most, then it steps down" },
-      { action: "Write a takeaway", pts: 20, rule: "Once per session, 15+ words" },
+      { action: "Write a journal", pts: 20, rule: "Once per session, 15+ words" },
     ],
   },
   {
@@ -127,22 +135,22 @@ const points: {
 
 const scan: { tag: string; title: string; detail: string }[] = [
   {
-    tag: "01 · Show",
+    tag: "Show",
     title: "My Code",
     detail: "The code changes every 30 seconds, so a screenshot goes stale fast.",
   },
   {
-    tag: "02 · Scan",
+    tag: "Scan",
     title: "In-app scanner",
     detail: "Opens the back camera and reads the code, on iPhone Safari too.",
   },
   {
-    tag: "03 · Check",
+    tag: "Check",
     title: "Server",
     detail: "Refuses expired codes and scanning yourself. Each pair counts once, whoever scans whom.",
   },
   {
-    tag: "04 · Answer",
+    tag: "Answer",
     title: "Icebreaker",
     detail: "Both phones get the same question, like “Favorite food?” Each player scores when they type the other's answer.",
   },
@@ -169,7 +177,7 @@ const days: {
   {
     day: "Day 2",
     when: "Full day",
-    what: "Meeting people, booths, hidden items, and a takeaway after each session.",
+    what: "Meeting people, booths, hidden items, and a journal after each session.",
     bar: [
       { state: "on", grow: 1 },
       { state: "paused", grow: 2, label: "Session" },
@@ -212,7 +220,7 @@ const system: { title: string; desc: string }[] = [
   },
   {
     title: "Built for the Room",
-    desc: "Pauses during sessions, an usher console for help at the door, and a big-screen view that cycles leaderboards and takeaways.",
+    desc: "Pauses during sessions, an usher console for help at the door, and a big-screen view that cycles leaderboards and shared journals.",
   },
   {
     title: "Safe by Default",
@@ -223,22 +231,22 @@ const system: { title: string; desc: string }[] = [
 // From AGENTS.md and the repo's Claude skills. Each step is a rule the agent follows, not a tip.
 const loop: { tag: string; title: string; detail: string }[] = [
   {
-    tag: "01 · Pick",
+    tag: "Pick",
     title: "/pick-task",
     detail: "Offers three pieces that are ready to build, soonest due first, then claims one so nobody builds it twice.",
   },
   {
-    tag: "02 · Plan",
+    tag: "Plan",
     title: "Rule IDs",
     detail: "Before touching a file, the agent shows a short plan that cites the written rules, like GAME-013.",
   },
   {
-    tag: "03 · Build",
+    tag: "Build",
     title: "Teaching mode",
     detail: "After each change, the agent explains in plain words what changed, why, and which commands it ran.",
   },
   {
-    tag: "04 · Prove",
+    tag: "Prove",
     title: "Phone check",
     detail: "The agent checks every changed screen at 360px. A person then runs each test step on a real phone.",
   },
@@ -278,16 +286,20 @@ export default function SideQuestPage() {
 
         {/* hero */}
         <header className={styles.hero}>
-          <p className={`label ${styles.heroEyebrow}`}>
-            NextGen Conference 2027 · In development
-          </p>
-          <h1 className={styles.heroTitle}>
-            Side<br />Quest
-          </h1>
-          <p className={styles.heroSub}>
-            A phone game that makes meeting other churches the easiest way to
-            score.
-          </p>
+          <div className={styles.heroMain}>
+            <div>
+              <h1 className={styles.heroTitle}>
+                Side<br />Quest
+              </h1>
+              <p className={styles.heroSub}>
+                A phone game that makes meeting other churches the easiest way
+                to score.
+              </p>
+            </div>
+            <div className={styles.heroFigure}>
+              <Hairline name="sidequest" label="Two phones on a table, one scanning the QR code on the other" />
+            </div>
+          </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
               <span className={styles.heroStatValue}>300</span>
@@ -306,37 +318,42 @@ export default function SideQuestPage() {
               <span className={styles.heroStatLabel}>conference days</span>
             </div>
           </div>
-          <p className={`caption ${styles.heroBadge}`}>
-            Lead developer · Volunteer team · March 2027
-          </p>
+          <dl className={styles.heroMeta}>
+            {heroMeta.map((m) => (
+              <div key={m.label}>
+                <dt className={`label ${styles.heroMetaLabel}`}>{m.label}</dt>
+                <dd className={styles.heroMetaValue}>
+                  {m.value}
+                  {m.detail && (
+                    <span className={styles.heroMetaDetail}>{m.detail}</span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </header>
 
         {/* overview */}
         <section className={styles.section} aria-labelledby="overview-h">
-          <h2 id="overview-h" className={`label ${styles.sectionLabel}`}>
-            Overview
+          <h2 id="overview-h" className={styles.overviewLead}>
+            At most conferences, youth leaders spend their free time with
+            their own church. Side Quest turns that around.
           </h2>
-          <div className={styles.overviewText}>
-            <p className={styles.overviewLead}>
-              At most conferences, youth leaders spend their free time with
-              their own church. Side Quest turns that around.
-            </p>
-            <p className={styles.overviewBody}>
-              An optional game that runs in the phone&apos;s browser. Players
-              earn points for meeting people, exploring the venue, and sharing
-              what they learned, with the biggest points for crossing church
-              lines.
-            </p>
-          </div>
+          <p className={styles.overviewBody}>
+            An optional game that runs in the phone&apos;s browser. Players
+            earn points for meeting people, exploring the venue, and sharing
+            what they learned, with the biggest points for crossing church
+            lines.
+          </p>
         </section>
 
         {/* launch video */}
         <section className={styles.section} aria-labelledby="video-h">
-          <h2 id="video-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="video-h" className={styles.sectionLabel}>
             The Pitch
           </h2>
           <p className={styles.sectionIntro}>
-            The how-to video players see before the conference, in 26
+            The how-to video players see before the conference, in 25
             seconds.
           </p>
           <div className={styles.video}>
@@ -362,7 +379,7 @@ export default function SideQuestPage() {
 
         {/* the app */}
         <section className={styles.section} aria-labelledby="app-h">
-          <h2 id="app-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="app-h" className={styles.sectionLabel}>
             The App
           </h2>
           <ul className={styles.screens}>
@@ -387,7 +404,7 @@ export default function SideQuestPage() {
 
         {/* points */}
         <section className={styles.section} aria-labelledby="loop-h">
-          <h2 id="loop-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="loop-h" className={styles.sectionLabel}>
             How You Play
           </h2>
           <p className={styles.sectionIntro}>
@@ -435,7 +452,7 @@ export default function SideQuestPage() {
 
         {/* one scan */}
         <section className={styles.section} aria-labelledby="scan-h">
-          <h2 id="scan-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="scan-h" className={styles.sectionLabel}>
             One Scan
           </h2>
           <p className={styles.sectionIntro}>
@@ -461,7 +478,7 @@ export default function SideQuestPage() {
 
         {/* three days */}
         <section className={styles.section} aria-labelledby="days-h">
-          <h2 id="days-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="days-h" className={styles.sectionLabel}>
             Three Days
           </h2>
           <p className={styles.sectionIntro}>
@@ -509,19 +526,15 @@ export default function SideQuestPage() {
           </p>
         </section>
 
-        {/* callout */}
-        <div className={styles.callout}>
-          <p className={styles.calloutText}>
+        {/* how it works */}
+        <section className={styles.section} aria-labelledby="system-h">
+          <h2 id="system-h" className={styles.sectionLabel}>
+            How It Works
+          </h2>
+          <p className={styles.sectionIntro}>
             Load-tested with 300 phones joining within a minute, because
             everyone scans the join QR together on night one.
           </p>
-        </div>
-
-        {/* how it works */}
-        <section className={styles.section} aria-labelledby="system-h">
-          <h2 id="system-h" className={`label ${styles.sectionLabel}`}>
-            How It Works
-          </h2>
           <div className={styles.arch} role="img" aria-label="Four screens talk to one FastAPI app, which checks the game state, pays points through one service, writes an audit log, and stores everything in SQLite on a Railway volume with daily, weekly, and monthly backups.">
             <ul className={styles.archCol}>
               {surfaces.map((s) => (
@@ -551,13 +564,10 @@ export default function SideQuestPage() {
             </div>
           </div>
           <ol className={styles.sysList}>
-            {system.map((s, i) => (
+            {system.map((s) => (
               <li key={s.title} className={styles.sysItem}>
-                <span className={`caption ${styles.sysNum}`}>0{i + 1}</span>
-                <div className={styles.sysBody}>
-                  <h3 className={styles.sysTitle}>{s.title}</h3>
-                  <p className={styles.sysDesc}>{s.desc}</p>
-                </div>
+                <h3 className={styles.sysTitle}>{s.title}</h3>
+                <p className={styles.sysDesc}>{s.desc}</p>
               </li>
             ))}
           </ol>
@@ -565,7 +575,7 @@ export default function SideQuestPage() {
 
         {/* team workflow */}
         <section className={styles.section} aria-labelledby="team-h">
-          <h2 id="team-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="team-h" className={styles.sectionLabel}>
             How the Team Builds
           </h2>
           <p className={styles.sectionIntro}>
@@ -590,13 +600,10 @@ export default function SideQuestPage() {
             merges.
           </p>
           <ol className={`${styles.sysList} ${styles.guardrails}`}>
-            {guardrails.map((g, i) => (
+            {guardrails.map((g) => (
               <li key={g.title} className={styles.sysItem}>
-                <span className={`caption ${styles.sysNum}`}>0{i + 1}</span>
-                <div className={styles.sysBody}>
-                  <h3 className={styles.sysTitle}>{g.title}</h3>
-                  <p className={styles.sysDesc}>{g.desc}</p>
-                </div>
+                <h3 className={styles.sysTitle}>{g.title}</h3>
+                <p className={styles.sysDesc}>{g.desc}</p>
               </li>
             ))}
           </ol>
@@ -604,7 +611,7 @@ export default function SideQuestPage() {
 
         {/* repo */}
         <section className={styles.section} aria-labelledby="site-h">
-          <h2 id="site-h" className={`label ${styles.sectionLabel}`}>
+          <h2 id="site-h" className={styles.sectionLabel}>
             Built in the Open
           </h2>
           <p className={styles.ctaLead}>
